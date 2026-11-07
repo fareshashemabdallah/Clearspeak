@@ -43,3 +43,131 @@
 
 /* Influence Lab addition */
 .influenceModules{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:18px 0 22px}.ilModule{display:flex;flex-direction:column;gap:4px;text-align:start;min-height:94px;padding:11px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px}.ilModule small{color:var(--teal);font-weight:800}.ilModule span{font-weight:700;font-size:12px;line-height:1.4}.ilModule.selected{background:#e6f3f0;border:2px solid #138177}.ilModule b{color:#168a81}.influenceDetail{background:#f9fbfa;border:1px solid var(--line);border-radius:14px;padding:20px}.influenceCompare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.influenceCompare>div{padding:15px;border-radius:12px;background:#fff6ec;border:1px solid #e6d8c5}.influenceCompare>div+div{background:#e9f6f0;border:1px solid #bedcd0}.influenceCompare p{margin:8px 0 0}.influenceDetail ol li{margin:7px 0}.influenceDetail select{padding:10px;border:1px solid #b9ceca;border-radius:9px}.influenceTimer{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#e6f2f0;border-radius:12px;margin:15px 0;padding:13px}.influenceTimer .clock{font-size:32px;font-weight:850;color:#0d5c60;font-variant-numeric:tabular-nums}.influenceDetail input[type="range"]{accent-color:#0e666d;width:100%}.influenceDetail .audioCtl{margin:12px 0}.influenceDetail .audioCtl audio{width:100%}.influenceDetail .row button{min-height:43px}.influenceDetail textarea{min-height:115px}.influenceDetail ul li{margin:7px 0}@media(max-width:850px){.influenceModules{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:600px){.influenceModules{grid-template-columns:repeat(2,minmax(0,1fr))}.influenceCompare{grid-template-columns:1fr}.influenceDetail{padding:14px}.influenceTimer{align-items:start;flex-direction:column}}
+
+/* ClearSpeak — simplified experience / November 2026 */
+:root{--r:18px}
+body{background:#f7f9f8;color:#1b343b}
+header{padding:14px max(20px,calc((100vw - 1040px)/2)) 0;background:#113b46}
+header .top{align-items:center;flex-wrap:nowrap}
+header .brand{font-size:25px;letter-spacing:-1px}
+.brand-dot{color:#9ae2ce}
+header .sub{font-size:12px;margin:0;opacity:.9}
+header .eyebrow{display:none}
+header .headerActions{flex-shrink:0}
+.legacyNav{display:none!important}
+.nav.simpleNav{margin-top:13px;gap:2px;display:flex;justify-content:space-around;overflow:visible}
+.nav.simpleNav button{flex:1;text-align:center;min-height:48px;font-size:14px;padding:10px 6px}
+.layout{max-width:1040px;padding:20px 16px 110px}
+.simpleWelcome{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#eaf6f1;border:1px solid #c5e3d7;border-radius:19px;padding:24px;margin-bottom:15px}
+.simpleWelcome #simpleEyebrow{display:block;font-size:11px;color:#16665e;font-weight:800;letter-spacing:.9px;margin-bottom:6px}
+.simpleWelcome strong{font-size:24px;line-height:1.17;display:block;letter-spacing:-.5px}
+.simpleWelcome p{color:#526b6a;font-size:14px;margin:7px 0 0}
+.simpleWelcome .primary{min-height:48px;white-space:nowrap}
+#todayTab>.hero{display:block}
+#todayTab>.hero>.panel:nth-child(2){display:none}
+#todayTab>.hero>.panel:first-child{box-shadow:none;border:0;padding:3px 5px 8px;background:transparent}
+#todayTab>.hero h2{font-size:20px;margin:9px 0 3px}
+#todayTab>.hero .instruction{display:none}
+#todayTab>.hero #prevDay,#todayTab>.hero #nextDay{display:none}
+#todayTab .split{display:block;margin-top:9px}
+#todayTab .split>.panel{padding:18px 18px 20px;box-shadow:none}
+#workoutTitle{font-size:17px}
+#timePill{font-size:11px}
+#blockTabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:14px 0}
+#blockTabs>.blockBtn{padding:10px 5px;min-height:70px;text-align:center;border-radius:10px;word-break:normal}
+#blockTabs .blockBtn .n{display:block;letter-spacing:0;font-size:10px}
+#blockTabs .blockBtn .t{font-size:11px;line-height:1.25}
+#blockTabs .blockBtn .tm{display:none}
+#exerciseContent{padding:17px;background:#fff;margin-top:0;border-radius:13px}
+#exerciseContent>.mini:first-child{display:none}
+#exerciseContent>.title{font-size:20px}
+#exerciseContent>.title+p.muted{font-size:13px;margin:4px 0}
+#exerciseContent>.startGuide{display:none}
+#exerciseContent>.instruction{font-size:14px;margin:10px 0 14px;padding:10px 12px}
+#exerciseContent>.modelAnswer{background:#eff8f4;border-color:#b7dbce}
+#exerciseContent .modelAnswer .say{font-size:16px}
+#exerciseContent>.modelAnswer~.modelAnswer{display:none}
+#exerciseContent .voiceCoach{background:#f6faf9;border:1px solid #cfe3dc;padding:15px;margin-top:18px}
+#exerciseContent .voiceCoach h3{font-size:17px;margin-bottom:12px}
+#exerciseContent .voiceCoach .vcQuickStart,#exerciseContent .voiceCoach .vcExample,#exerciseContent .voiceCoach .vcNotice{display:none}
+#exerciseContent .voiceCoach textarea{min-height:96px;font-size:16px}
+#exerciseContent .voiceCoach .ratingRow{margin-top:12px}
+#exerciseContent .voiceCoach .vcActions{margin:11px 0}
+#exerciseContent .voiceCoach #csAssess{flex:1;background:#0e666d;color:#fff}
+#exerciseContent .voiceCoach #csRetry{flex:0}
+#exerciseContent .voiceCoach .vcAssessment{padding-top:12px}
+.simpleNext{width:100%;min-height:48px;font-size:15px}
+.simpleDetails{margin:15px 0;background:#fff;border:1px solid #d5e7df;border-radius:13px;overflow:hidden}
+.simpleDetails summary{padding:14px 16px;cursor:pointer;color:#155b60;font-weight:700;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.simpleDetails summary::-webkit-details-marker{display:none}
+.simpleDetails summary:after{content:'+';font-weight:800;color:#457978;font-size:19px}
+.simpleDetails[open] summary:after{content:'−'}
+.simpleDetails>.panel{border:0;box-shadow:none;border-top:1px solid var(--line);border-radius:0;padding:16px}
+.oldWriting{margin-top:10px}
+.oldWriting>.field,.oldWriting>.howTo,.oldWriting>.note{margin:12px 15px}
+.voiceDrawer{margin:8px 0 15px;padding:0}
+.voiceDrawer .vcActions,.voiceDrawer .vcMessage,.voiceDrawer #csPlayback{margin:8px 12px 13px}
+.voiceDrawer .vcActions button{flex:1 1 42%}
+#dayTools{margin-top:14px}
+#dayTools .panel{border:0;box-shadow:none}
+#scoreDetails{margin-top:15px}
+#scoreDetails .panel{background:#fff}
+#scoreDetails #completeSession{display:none}
+#scoreDetails #saveSession{width:100%}
+.simpleExploreIntro{padding:6px 0 20px}
+.simpleExploreIntro h2{margin:0 0 6px;font-size:25px;letter-spacing:-.6px}
+.simpleExploreIntro p{margin:0 0 16px;color:#627582;font-size:14px}
+.exploreCards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.exploreCard{border:1px solid #cde3db;min-height:95px;background:#fff;border-radius:16px;text-align:start;display:flex;align-items:center;gap:15px;padding:15px;color:var(--ink);box-shadow:var(--shadow)}
+.exploreCard span:nth-child(2){flex:1}
+.exploreEmoji{font-size:26px}
+.exploreCard strong{display:block;font-size:16px}
+.exploreCard small{display:block;color:#697d80;margin-top:3px;font-size:12px}
+.exploreCard>span:last-child{font-size:28px;color:#5a8e89}
+.simpleBack{border:0;background:none;font-weight:700;color:#176f70;padding:10px 0 16px;min-height:44px;font-size:14px}
+#programTab>.panel{box-shadow:none}
+#programTab>.panel #programHelp{font-size:13px}
+#programTab>.panel #dayList{margin-top:12px}
+.dayBtn{min-height:60px;padding:8px 6px}
+.dayBtn .dayI{display:none}
+body.ar .exploreCard{text-align:right}
+body.ar .simpleNext{text-align:center}
+@media(max-width:650px){
+ .layout{padding:14px 12px 100px}
+ header{padding:12px 13px 0}
+ header .brand{font-size:23px}
+ header .sub{font-size:10px}
+ .headerActions{gap:5px}
+ .headerActions .pill{font-size:11px;padding:7px 8px}
+ .simpleWelcome{display:block;padding:17px 17px 18px}
+ .simpleWelcome strong{font-size:21px}
+ .simpleWelcome .primary{display:block;width:100%;margin-top:13px}
+ #todayTab .split>.panel{padding:13px 10px}
+ #exerciseContent{padding:13px 10px}
+ #blockTabs{gap:4px}
+ #blockTabs>.blockBtn{padding:9px 2px;min-height:69px}
+ #blockTabs .blockBtn .t{font-size:10px}
+ .voiceCoach .vcActions button{min-width:0}
+ .exploreCards{grid-template-columns:1fr}
+ .simpleExploreIntro h2{font-size:22px}
+ #programTab>.panel{padding:15px}
+ .simpleDetails summary{font-size:13px}
+ .nav.simpleNav button{font-size:13px}
+}
+/* Keep action labels readable on narrow phones. */
+#exerciseContent .voiceCoach .vcActions:not(.voiceDrawer .vcActions){flex-wrap:nowrap}
+#exerciseContent .voiceCoach #csRetry{flex:0 0 auto;min-width:108px;white-space:normal;font-size:12px;text-align:center}
+#exerciseContent .voiceCoach #csAssess{min-width:0}
+@media(max-width:400px){#exerciseContent .voiceCoach .vcActions:not(.voiceDrawer .vcActions){gap:7px}#exerciseContent .voiceCoach #csRetry{min-width:100px}}
+/* v2 simple mode: runtime shell, original lesson logic intact */
+header{padding:13px max(14px,calc((100vw - 1050px)/2)) 0}header .brand{font-size:25px}header .sub{font-size:11px}.brandDot{color:#9be0ce}
+.simpLegacy{display:none!important}.nav.simpNav{display:flex;margin-top:10px;gap:2px;justify-content:space-around}.nav.simpNav button{flex:1;text-align:center;min-height:48px;padding:9px 5px;font-size:14px}
+.simpWelcome{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-bottom:16px;padding:22px 23px;border-radius:17px;background:#eaf6f1;border:1px solid #c9e5d9}.simpWelcome span{font-size:11px;letter-spacing:.7px;color:#126459;font-weight:800}.simpWelcome strong{font-size:24px;letter-spacing:-.5px;line-height:1.2;display:block}.simpWelcome p{color:#58746e;font-size:14px;margin:7px 0 0}.simpWelcome button{min-width:175px;min-height:49px}
+#todayTab>.hero{display:block}#todayTab>.hero>.panel:nth-child(2){display:none}#todayTab>.hero>.panel:first-child{padding:4px 5px;background:none;border:0;box-shadow:none}#todayTab>.hero h2{font-size:21px}#todayTab>.hero .instruction,#prevDay,#nextDay{display:none!important}
+#todayTab>.split{display:block;margin-top:13px}#todayTab>.split>.panel{padding:18px;border-radius:17px;box-shadow:none}
+#blockTabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}#blockTabs>.blockBtn{text-align:center;padding:9px 4px;min-height:67px}#blockTabs .blockBtn .tm{display:none}#blockTabs .blockBtn .t{font-size:11px;line-height:1.2}
+#exerciseContent{background:white;padding:16px;margin-top:10px}#exerciseContent>.mini:first-child,#exerciseContent>.startGuide{display:none}#exerciseContent>.modelAnswer{background:#edf7f3;border-color:#bfded3}#exerciseContent .voiceCoach{margin-top:17px;background:#f6faf9;padding:14px}#exerciseContent .voiceCoach .vcQuickStart,#exerciseContent .voiceCoach .vcExample,#exerciseContent .voiceCoach .vcNotice{display:none}#exerciseContent .voiceCoach h3{font-size:17px}#exerciseContent .voiceCoach textarea{font-size:16px;min-height:90px}
+#exerciseContent .voiceCoach .vcActions:not(.simpVoice .vcActions){flex-wrap:nowrap;gap:7px}#exerciseContent .voiceCoach #csAssess{flex:1;min-width:0}#exerciseContent .voiceCoach #csRetry{flex:0 0 auto;min-width:105px;font-size:12px;white-space:normal;text-align:center}.simpNext{width:100%;min-height:48px}
+.simpDetails{margin:14px 0;background:white;border:1px solid #d4e7df;border-radius:14px;overflow:hidden}.simpDetails summary{list-style:none;cursor:pointer;padding:14px 16px;color:#145e61;font-weight:750;font-size:13px;display:flex;justify-content:space-between;gap:8px}.simpDetails summary:after{content:'+';font-size:18px}.simpDetails[open] summary:after{content:'−'}.simpDetails summary::-webkit-details-marker{display:none}.simpDetails>.panel{border:0;box-shadow:none;padding:16px}.simpWriting>.field,.simpWriting>.howTo,.simpWriting>.note{margin:12px 15px}.simpVoice .vcActions,.simpVoice .vcMessage,.simpVoice #csPlayback{margin:10px 12px}.simpVoice .vcActions button{flex:1 1 42%}#simpScores #completeSession{display:none}#simpScores #saveSession{width:100%}
+.simpExplore{padding:6px 0 15px}.simpExplore h2{font-size:24px;margin:0 0 14px}.simpCards{display:grid;grid-template-columns:1fr 1fr;gap:11px}.simpCard{display:flex;align-items:center;gap:13px;background:white;border:1px solid #cbe3dc;border-radius:15px;padding:14px;text-align:start;color:#18353e;min-height:90px}.simpCard>span:first-child{font-size:27px}.simpCard>span:nth-child(2){flex:1}.simpCard strong{display:block;font-size:15px}.simpCard small{display:block;color:#637880;margin-top:4px;font-size:12px}.simpCard b{color:#477d75;font-size:25px}.simpBack{border:0;background:none;color:#17646a;font-weight:750;min-height:44px;margin-bottom:10px;font-size:14px}body.ar .simpCard{text-align:right}
+@media(max-width:650px){.layout{padding:13px 12px 90px}header{padding:13px 13px 0}header .brand{font-size:23px}header .sub{font-size:10px}.nav.simpNav button{font-size:13px}.simpWelcome{display:block;padding:18px}.simpWelcome strong{font-size:21px}.simpWelcome button{width:100%;margin-top:12px}#todayTab>.split>.panel{padding:12px 10px}#exerciseContent{padding:12px 10px}#blockTabs>.blockBtn .t{font-size:10px}.simpCards{grid-template-columns:1fr}}
