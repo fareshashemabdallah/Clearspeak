@@ -8,15 +8,15 @@
 
  Object.assign(phrases.en,{
   footerTrain:'A little practice every day',doneSpeaking:"I’ve finished speaking",timerHint:'You can finish whenever you’re ready.',timeUp:'Time is up. You can finish or try again.',backPracticeShort:'Back to practice',checkEyebrow:'A MOMENT TO REFLECT',checkTitle:'You did it.',checkTitle2:'Keep going.',checkIntro:'How did it feel to say your message in your own words?',feelEasy:'Clear and comfortable',feelOkay:'A little hesitant',feelHard:'I struggled',nextFocus:'ONE THING TO TRY NEXT',selfReported:'Based on your reflection, not an analysis of your voice.',nextThought:'Try another thought',nextExercise:'Next speaking moment',returnTraining:'See my daily practice',retrySpeak:'Say it once more',train:'My training',trainingBack:'Back to speaking help',trainingEyebrow:'YOUR GENTLE DAILY PRACTICE',trainingTitle:'One small step.',trainingTitle2:'A stronger voice.',trainingIntro:'Three short speaking moments, one at a time. No scores, no pressure.',trainingPrivacy:'Your daily progress stays in this browser.',todayProgress:'Today · {n} of 3',begin:'Begin this moment',finishedToday:'You showed up today.',finishedDesc:'Three moments of practice completed. That is enough for today.',finishedNudge:'Come back tomorrow—or practise another thought whenever you like.',trainingDone:'Try another thought',tipEasy:'Great. Next time, pause after your first sentence and let the point land.',tipOkay:'Next time, say only your main point first. Add one reason after a small pause.',tipHard:'Try just one clear sentence. It is enough to be understood before adding detail.',trainingPrompts:[
-   {title:'Start with your point',desc:'A colleague asks why preparation matters. Say your main message first.',nudge:'Lead with one sentence.',sample:'meeting'},
-   {title:'Stay calm when interrupted',desc:'Someone speaks before you finish. Reclaim your turn without raising your voice.',nudge:'Calm is more persuasive than loud.',sample:'interrupted'},
-   {title:'Make a simple request',desc:'Suggest a plan at home without giving a long explanation.',nudge:'One request. One reason.',sample:'home'}]
+   {title:'Make one word clear',desc:'Practise a difficult word slowly, then say your whole message.',nudge:'Slowly first, naturally second.',sample:'meeting'},
+   {title:'Give your words room',desc:'Respond to an interruption with a steady pace and one useful pause.',nudge:'Pause after your main point.',sample:'interrupted'},
+   {title:'Finish with influence',desc:'Make one recommendation and finish it confidently without overexplaining.',nudge:'End calmly. Then stop.',sample:'home'}]
  });
  Object.assign(phrases.ar,{
   footerTrain:'شوية تدريب كل يوم',doneSpeaking:'خلّصت كلامي',timerHint:'فيك تخلّص وقت ما بتكون جاهز.',timeUp:'خلص الوقت. فيك تكمّل أو تعيد المحاولة.',backPracticeShort:'ارجع للتجربة',checkEyebrow:'لحظة صغيرة للتقييم',checkTitle:'عملتها.',checkTitle2:'كمّل بطريقتك.',checkIntro:'كيف حسّيت لما حكيت الفكرة بكلماتك؟',feelEasy:'كانت واضحة ومريحة',feelOkay:'تردّدت شوي',feelHard:'كانت صعبة',nextFocus:'شغلة واحدة للمرة الجاية',selfReported:'هيدا اقتراح مبني على تقييمك، مش على تحليل صوتك.',nextThought:'جرّب فكرة تانية',nextExercise:'التدريب اللي بعده',returnTraining:'شوف تدريبي اليوم',retrySpeak:'احكيها مرة تانية',train:'تدريبي',trainingBack:'ارجع لمساعدة الكلام',trainingEyebrow:'تدريب يومي خفيف',trainingTitle:'خطوة صغيرة.',trainingTitle2:'وصوت أقوى.',trainingIntro:'ثلاث مواقف قصيرة، واحد بعد التاني. بلا علامات وبلا ضغط.',trainingPrivacy:'تقدّمك محفوظ على هالمتصفح.',todayProgress:'اليوم · {n} من ٣',begin:'بلّش هالموقف',finishedToday:'تدرّبت اليوم!',finishedDesc:'خلصت ثلاث مواقف قصيرة. هالقد بكفّي لليوم.',finishedNudge:'ارجع بكرا أو جرّب فكرة جديدة بوقتك.',trainingDone:'جرّب فكرة تانية',tipEasy:'حلو. المرة الجاية خد وقفة بعد أول جملة وخلي الفكرة توصل.',tipOkay:'المرة الجاية بلّش بالفكرة الأساسية، وبعد وقفة قصيرة أعطِ سبب واحد.',tipHard:'جرّب جملة واحدة واضحة بس. مش ضروري تشرح كل التفاصيل.',trainingPrompts:[
-   {title:'بلّش بالخلاصة',desc:'زميل بيسألك ليش الاستعداد مهم. قول الفكرة الأساسية أولاً.',nudge:'جملة أساسية واحدة تكفي.',sample:'meeting'},
-   {title:'رد بهدوء على المقاطعة',desc:'حدا بيقاطعك قبل ما تخلّص. اطلب تكمل من دون ما تعلّي صوتك.',nudge:'الهدوء بيوصل الفكرة.',sample:'interrupted'},
-   {title:'اطلب طلب بسيط',desc:'اقترح نشاط بالبيت من دون شرح طويل.',nudge:'طلب واحد وسبب واحد.',sample:'home'}]
+   {title:'وضّح كلمة مهمة',desc:'تمرّن على كلمة صعبة ببطء، وبعدها احكي فكرتك كاملة.',nudge:'أول مرة ببطء، والتانية بطبيعتك.',sample:'meeting'},
+   {title:'خلّي لكلامك مساحة',desc:'رد على المقاطعة بهدوء مع وقفة صغيرة بعد الفكرة الأساسية.',nudge:'وقفة صغيرة بتساعد الفكرة توصل.',sample:'interrupted'},
+   {title:'اختم بثقة',desc:'قول توصية واحدة، واختم بصوت هادي من دون شرح زيادة.',nudge:'اختم، وبعدها وقف.',sample:'home'}]
  });
 
  const examples={
@@ -41,7 +41,7 @@
  const sentence=s=>{const c=normalize(s);return c?(c+(/[?؟]\s*$/.test(s)?(lang==='ar'?'؟':'?'):'.')):''};
  const capitalize=s=>s?s[0].toUpperCase()+s.slice(1):s;
  const wc=s=>(s.match(/[\p{L}\p{N}]+/gu)||[]).length;
- function language(){document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.title=lang==='ar'?'ClearSpeak — احكيها بطريقتك':'ClearSpeak — Your words, easier to say.';$('langButton').textContent=lang==='ar'?'English':'عربي';document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=tr(el.dataset.t)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});$('trainLink').innerHTML=tr('train')+' <span aria-hidden="true">↗</span>';$('shorter').querySelector('[data-t]').textContent=short?tr('longer'):tr('shorter');if(output&&active!=='entry'){if(chosenSample&&output.sampleKey)output={...examples[lang][output.sampleKey],sampleKey:output.sampleKey};renderResult();renderCues()} renderTraining();if(selectedFeeling)renderFeedback(); if(active==='checkin')updateNextLabel();}
+ function language(){document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.title=lang==='ar'?'ClearSpeak — احكيها بطريقتك':'ClearSpeak — Your words, easier to say.';$('langButton').textContent=lang==='ar'?'English':'عربي';document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=tr(el.dataset.t)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});$('trainLink').innerHTML=tr('train')+' <span aria-hidden="true">↗</span>';$('shorter').querySelector('[data-t]').textContent=short?tr('longer'):tr('shorter');if(output&&active!=='entry'){if(chosenSample&&output.sampleKey)output={...examples[lang][output.sampleKey],sampleKey:output.sampleKey};renderResult();renderCues()} renderTraining();if(selectedFeeling)renderFeedback(); if(active==='checkin')updateNextLabel();window.CSVoice?.render?.();}
  function screen(id){active=id;for(const key of ['entry','result','practiceScreen','checkin','training'])$(key).hidden=key!==id;window.scrollTo({top:0,behavior:'instant'});}
  function sample(key){chosenSample=key; $('thought').value=tr('samples')[key];$('error').hidden=true;build();}
  function cleanEnglish(input){let s=normalize(input).replace(/^(um+|uh+|well|actually|basically|you know|I mean)[,\s]+/i,'').replace(/^(I just wanted to say that|I wanted to say that)\s+/i,'');s=s.replace(/^I want every country office to prepare\b/i,'Every country office should prepare');s=s.replace(/^I think we should\b/i,'We should').replace(/^I feel like we should\b/i,'We should');s=s.replace(/^I want us to\b/i,'We should');s=s.replace(/^I want to\b/i,'I would like to');return capitalize(s)}
@@ -61,8 +61,8 @@
  function renderCues(){if(!output)return;const root=$('cues');root.replaceChildren();let labels=output.cues?.length?output.cues:output.parts.map(s=>s.split(' ').slice(0,4).join(' '));for(let i=0;i<Math.min(3,labels.length);i++){const box=document.createElement('div');box.className='cue';const meta=document.createElement('div');meta.className='cue-index';meta.textContent=([tr('point'),tr('reason'),tr('close')][i]||tr('point'));const val=document.createElement('span');val.className='cue-text';val.textContent=labels[i];box.append(meta,val);root.append(box)}}
  async function copy(){try{await navigator.clipboard.writeText(outputText());const b=$('copy').querySelector('[data-t]');b.textContent=tr('copied');setTimeout(()=>b.textContent=tr('copy'),1500)}catch(e){$('tip').textContent=tr('copyFail')}}
  function hear(){if(!('speechSynthesis' in window)){ $('tip').textContent=tr('unavailable');return;}speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(outputText());utter.lang=lang==='ar'?'ar':'en-US';utter.rate=0.92;utter.onstart=()=>{$('listen').querySelector('[data-t]').textContent=tr('listening')};utter.onend=utter.onerror=()=>{$('listen').querySelector('[data-t]').textContent=tr('listen')};speechSynthesis.speak(utter)}
- function tick(){remaining--;$('countdown').textContent=String(remaining);if(remaining<=0){clearInterval(timer);timer=null;$('timerHint').textContent=tr('timeUp');$('startTimer').querySelector('[data-t]').textContent=tr('restart')}}
- function startTimer(){if(timer){clearInterval(timer);timer=null;$('startTimer').querySelector('[data-t]').textContent=tr('restart');return}remaining=20;$('countdown').textContent='20';$('timerHint').textContent=tr('timerHint');$('startTimer').querySelector('[data-t]').textContent=tr('stop');timer=setInterval(tick,1000)}
+ function tick(){remaining--;$('countdown').textContent=String(remaining);if(remaining<=0){clearInterval(timer);timer=null;window.CSVoice?.stop?.();$('timerHint').textContent=tr('timeUp');$('startTimer').querySelector('[data-t]').textContent=tr('restart')}}
+ function startTimer(){if(timer){clearInterval(timer);timer=null;window.CSVoice?.stop?.();$('startTimer').querySelector('[data-t]').textContent=tr('restart');return}remaining=20;$('countdown').textContent='20';$('timerHint').textContent=tr('timerHint');$('startTimer').querySelector('[data-t]').textContent=tr('stop');timer=setInterval(tick,1000);window.CSVoice?.start?.()}
  function resetTimer(){clearInterval(timer);timer=null;remaining=20;$('countdown').textContent='20';$('timerHint').textContent=tr('timerHint');$('startTimer').querySelector('[data-t]').textContent=tr('start')}
  $('langButton').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';try{localStorage.setItem('cs_light_lang',lang)}catch(_){}if(chosenSample&&$('thought').value===phrases[lang==='ar'?'en':'ar'].samples[chosenSample])$('thought').value=tr('samples')[chosenSample];language()});
  $('thought').addEventListener('input',()=>{chosenSample=null;$('error').hidden=true});
@@ -70,8 +70,8 @@
  document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{mode='quick';sample(b.dataset.sample)}));
  $('create').addEventListener('click',()=>{mode='quick';build()});
  $('backResult').addEventListener('click',()=>screen('entry'));
- $('practice').addEventListener('click',()=>{resetTimer();renderCues();$('reveal').hidden=true;$('showScript').textContent=tr('showScript');screen('practiceScreen')});
- $('backPractice').addEventListener('click',()=>{resetTimer();screen('result')});
+ $('practice').addEventListener('click',()=>{resetTimer();renderCues();$('reveal').hidden=true;$('showScript').textContent=tr('showScript');screen('practiceScreen');window.CSVoice?.prepare?.({message:outputText(),lang,trainingStep,trainingMode:mode})});
+ $('backPractice').addEventListener('click',()=>{resetTimer();window.CSVoice?.reset?.();screen('result')});
  $('shorter').addEventListener('click',()=>{short=!short;renderResult()});
  $('copy').addEventListener('click',copy);
  $('listen').addEventListener('click',hear);
@@ -90,23 +90,23 @@
    $('dailyNudge').textContent=completed?tr('finishedNudge'):item.nudge;
    $('trainingAction').textContent=completed?tr('trainingDone'):tr('begin');
  }
- function showTraining(){resetTimer();mode='daily';trainingStep=loadTraining();renderTraining();screen('training')}
+ function showTraining(){resetTimer();window.CSVoice?.reset?.();mode='daily';trainingStep=loadTraining();renderTraining();screen('training')}
  function beginTraining(){if(trainingStep>=3){mode='quick';newThought();return;}
    const sampleKey=phrases[lang].trainingPrompts[trainingStep].sample;
    chosenSample=sampleKey;$('thought').value=tr('samples')[sampleKey];build();
  }
- function completePractice(){resetTimer();selectedFeeling=null;$('coachTip').hidden=true;
+ function completePractice(){window.CSVoice?.finish?.();resetTimer();selectedFeeling=null;$('coachTip').hidden=true;
    $('nextAction').disabled=true;document.querySelectorAll('[data-feeling]').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false')});
    updateNextLabel();screen('checkin');
  }
  function renderFeedback(){if(!selectedFeeling)return;
-   $('coachAdvice').textContent=tr(selectedFeeling==='easy'?'tipEasy':selectedFeeling==='okay'?'tipOkay':'tipHard');
+   $('coachAdvice').textContent=tr(selectedFeeling==='easy'?'tipEasy':selectedFeeling==='okay'?'tipOkay':'tipHard')+' '+(window.CSVoice?.getTip?.()||'');
    $('coachTip').hidden=false;
  }
  function updateNextLabel(){ $('nextAction').querySelector('[data-t]').textContent=mode==='daily'?(trainingStep===2?tr('returnTraining'):tr('nextExercise')):tr('nextThought') }
  function chooseFeeling(feeling){selectedFeeling=feeling;document.querySelectorAll('[data-feeling]').forEach(b=>{const v=b.dataset.feeling===feeling;b.classList.toggle('selected',v);b.setAttribute('aria-pressed',String(v))});renderFeedback();$('nextAction').disabled=false;}
- function newThought(){mode='quick';chosenSample=null;output=null;short=false;$('thought').value='';$('error').hidden=true;screen('entry');}
- function advance(){if(!selectedFeeling)return;try{localStorage.setItem('cs_light_practice_count',String((Number(localStorage.getItem('cs_light_practice_count'))||0)+1))}catch(_){}
+ function newThought(){window.CSVoice?.reset?.();mode='quick';chosenSample=null;output=null;short=false;$('thought').value='';$('error').hidden=true;screen('entry');}
+ function advance(){if(!selectedFeeling)return;window.CSVoice?.reset?.();try{localStorage.setItem('cs_light_practice_count',String((Number(localStorage.getItem('cs_light_practice_count'))||0)+1))}catch(_){}
    if(mode==='daily'){trainingStep=Math.min(3,trainingStep+1);saveTraining();if(trainingStep<3)beginTraining();else showTraining()}else newThought();
  }
  $('trainLink').addEventListener('click',showTraining);
@@ -114,9 +114,9 @@
  $('backTraining').addEventListener('click',()=>{mode='quick';screen('entry')});
  $('launchTraining').addEventListener('click',beginTraining);
  $('doneSpeaking').addEventListener('click',completePractice);
- $('backCheckin').addEventListener('click',()=>{selectedFeeling=null;resetTimer();screen('practiceScreen')});
+ $('backCheckin').addEventListener('click',()=>{selectedFeeling=null;resetTimer();window.CSVoice?.reset?.();screen('practiceScreen')});
  document.querySelectorAll('[data-feeling]').forEach(b=>b.addEventListener('click',()=>chooseFeeling(b.dataset.feeling)));
- $('retrySpeaking').addEventListener('click',()=>{selectedFeeling=null;resetTimer();screen('practiceScreen')});
+ $('retrySpeaking').addEventListener('click',()=>{selectedFeeling=null;resetTimer();window.CSVoice?.reset?.();screen('practiceScreen')});
  $('nextAction').addEventListener('click',advance);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInterval(timer);timer=null;window.speechSynthesis?.cancel?.()}});
  language();screen('entry');
