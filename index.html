@@ -8,8 +8,109 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ClearSpeak">
 <meta name="color-scheme" content="light"><meta name="theme-color" content="#113b46">
-<title>ClearSpeak | Simple speaking practice</title>
+<title>ClearSpeak | Make your point. Feel heard.</title>
 <link rel="stylesheet" href="styles.css?v=2">
+<style>
+/* ClearSpeak Moment: welcoming personal studio with training on demand */
+:root{--moment-night:#122c35;--moment-ink:#18333c;--moment-orange:#e88668;--moment-cream:#fdf9f3;--moment-soft:#fff2e9}
+body.coachLanding{background:#fdfaf6;color:var(--moment-ink)}
+body.coachLanding header{background:#173640}
+header .sub{max-width:230px}
+#navProgram{display:none!important}
+.simpleNav #navMoment{font-weight:750}
+body.coachLanding .simpleNav #navMoment{color:#fff;border-bottom-color:#f5b49d}
+body.coachLanding #todayTab,body.coachLanding #programTab,body.coachLanding #progressTab,body.coachLanding #toolkitTab,body.coachLanding #influenceTab,body.coachLanding #healthNote,body.coachLanding #footer{display:none!important}
+#momentHome{display:none}
+body.coachLanding #momentHome{display:block}
+#momentHome .moment-shell{max-width:770px;margin:auto}
+#momentHome button{transition:transform .16s,background .2s,border-color .2s}
+#momentHome button:active{transform:scale(.985)}
+.moment-hero{position:relative;text-align:center;padding:44px 20px 30px}
+.moment-overline{color:#af6556;letter-spacing:2.1px;font-size:10px;font-weight:850;margin-bottom:19px}
+.moment-spark{font-size:18px;vertical-align:middle;margin-right:6px}
+.moment-hero h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:clamp(41px,6.2vw,68px);letter-spacing:-2.9px;line-height:1.055;margin:0;color:#17353b}
+.moment-hero h2 em{font-style:italic;color:#cb755d}
+.moment-hero p{max-width:470px;margin:20px auto 0;color:#63737a;font-size:16px;line-height:1.58}
+.moment-intro-mark{position:absolute;bottom:8px;right:11px;display:flex;gap:4px;align-items:center;opacity:.8}
+.moment-intro-mark span{background:#e7a18e;border-radius:15px;width:4px;height:9px}
+.moment-intro-mark span:nth-child(2){height:20px}.moment-intro-mark span:nth-child(3){height:31px}.moment-intro-mark span:nth-child(4){height:16px}.moment-intro-mark span:nth-child(5){height:7px}
+.moment-editor,.moment-result{background:#fff;border:1px solid #eedfd7;border-radius:24px;padding:25px;box-shadow:0 20px 60px rgba(40,55,57,.075)}
+.moment-step{display:flex;align-items:center;gap:10px;color:#24434a;font-size:17px;font-weight:750;margin-bottom:15px}
+.moment-step-round{font-size:11px;font-weight:800;color:#b56f5b;display:flex;justify-content:center;align-items:center;border-radius:50%;background:#fff1e9;border:1px solid #f6dfd5;width:32px;height:32px}
+.moment-editor textarea{width:100%;border:1.5px solid #e6dbd4;background:#fffdfa;min-height:139px;border-radius:15px;padding:19px;font-size:17px;line-height:1.6;color:#193840;resize:vertical}
+.moment-editor textarea:focus{border-color:#cb806b;outline:3px solid #f6e0d5;outline-offset:1px}
+.moment-editor textarea::placeholder{color:#8a9695}
+.moment-starts{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.moment-starts>span,.moment-intent>span{font-size:12px;color:#798483;font-weight:650}
+.moment-chips,.moment-context{display:flex;gap:7px;flex-wrap:wrap}
+.moment-chips button{border:1px solid #e8dbd3;border-radius:999px;background:#faf7f3;color:#485d5d;padding:8px 11px;font-size:12px;font-weight:700;min-height:35px}
+.moment-chips button:hover{background:#fceee6}
+.moment-intent{padding:19px 0 15px;margin-top:18px;border-top:1px solid #f1ece6;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.moment-context{background:#f6f5f2;border-radius:999px;padding:4px}
+.moment-context button{border:0;border-radius:99px;padding:9px 13px;font-size:12px;background:transparent;color:#627373;font-weight:750;min-height:34px}
+.moment-context button.on{background:#fff;box-shadow:0 2px 9px #aabbba33;color:#1b4249}
+.moment-actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-top:2px}
+.moment-main-action{display:inline-flex;justify-content:space-between;align-items:center;gap:22px;min-height:56px;background:#17454d;color:#fff;border:0;border-radius:13px;padding:14px 19px;font-size:15px;font-weight:750;flex:1 0 245px}
+.moment-main-action:hover{background:#0e343b}
+.moment-main-action span:last-child{font-size:22px;font-weight:400}
+.moment-local-note{font-size:11px;color:#8a9692;line-height:1.4;max-width:185px}
+.moment-error{color:#ab4e36;font-size:13px;min-height:1px;margin-top:8px}
+.moment-bottom{display:flex;align-items:center;justify-content:space-between;gap:19px;margin-top:30px;padding:25px 3px 17px;border-top:1px solid #e9e4db}
+.moment-bottom-eyebrow,.moment-kicker{font-size:10px;letter-spacing:1.65px;font-weight:850;color:#b66b55}
+.moment-bottom h3{font-family:Georgia,serif;font-size:24px;line-height:1.25;font-weight:500;letter-spacing:-.6px;margin:7px 0}
+.moment-bottom p{font-size:13px;color:#74817d;max-width:470px;margin:0}
+.moment-training-button{flex-shrink:0;color:#17454d;border:1px solid #b4ceca;background:transparent;padding:13px 15px;border-radius:12px;font-weight:800;font-size:12px;min-height:45px}
+.moment-training-button:hover{background:#e9f3f0}
+.moment-result{margin-top:15px;scroll-margin-top:20px}
+.moment-result-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.moment-text-button{background:transparent;border:0;color:#6e7d7c;font-size:12px;font-weight:700;min-height:37px}
+.moment-result h3{font-family:Georgia,serif;font-size:31px;line-height:1.2;font-weight:500;letter-spacing:-1px;margin:12px 0 24px}
+.moment-script{border-radius:16px;border:1px solid #efe5dc;background:#fffcf7;padding:23px 23px 8px}
+.moment-script-line{padding:0 0 9px}.moment-script-line p{margin:4px 0 0;font-size:18px;line-height:1.55;color:#273f44}
+.moment-script-line.lead p{font-size:23px;line-height:1.38;letter-spacing:-.45px;font-weight:760;color:#173b43}
+.moment-script-line.close p{font-weight:750}
+.moment-line-tag{color:#bc765f;font-size:10px;font-weight:850;letter-spacing:1.2px;text-transform:uppercase}
+.moment-pause{display:flex;align-items:center;gap:14px;margin:10px 0 19px;font-size:10px;color:#c0856d;letter-spacing:1.1px;font-weight:780}
+.moment-pause:before{content:'';height:1px;width:23px;background:#e6b8a6}
+.moment-script-footer{font-size:12px;color:#7c8a89;margin:13px 0}
+.moment-result-actions{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.moment-result-actions .moment-main-action{flex:1 1 250px;min-height:50px}
+.moment-outline-action{border:1px solid #b4d0ca;background:#fff;color:#1b5559;border-radius:12px;min-height:50px;padding:11px 15px;font-size:13px;font-weight:780;flex:1 1 175px}
+.moment-outline-action:hover{background:#eaf4f0}
+.moment-cues{margin-top:20px;padding:18px;background:#edf6f1;border-radius:15px}
+.moment-cue-words{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.moment-cue-words span{padding:7px 10px;border-radius:10px;background:#fff;border:1px solid #d5e7e0;font-size:12px;font-weight:750;color:#2a5153}
+.moment-cues p{font-size:12px;color:#5a7573}.moment-cues .moment-main-action{min-height:43px;width:100%;font-size:13px}
+.moment-feedback{background:#fff3eb;border-radius:13px;padding:17px;margin-top:13px}
+.moment-feedback>span{font-weight:800;color:#7a4437}.moment-feedback p{font-size:13px;color:#816052}
+.moment-improvement{border-top:1px solid #f0e8e4;margin-top:21px;padding-top:17px}
+.moment-improvement p{color:#536768;font-size:13px;margin:6px 0}
+.moment-honesty{font-size:11px;color:#94a09e;margin-top:13px}
+.srOnly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body.ar .moment-hero h2{letter-spacing:-1px}body.ar .moment-overline{letter-spacing:.2px}
+body.ar .moment-editor textarea{text-align:right}body.ar .moment-line-tag{letter-spacing:0}
+@media(max-width:680px){
+  .layout{padding:12px 12px 70px}
+  .moment-hero{padding:43px 3px 28px;text-align:left}
+  body.ar .moment-hero{text-align:right}
+  .moment-hero h2{font-size:46px;letter-spacing:-2.1px}
+  .moment-hero p{margin:15px 0 0;font-size:14px;max-width:320px}
+  .moment-editor,.moment-result{padding:16px;border-radius:18px}
+  .moment-step{font-size:16px}.moment-editor textarea{min-height:150px;padding:15px;font-size:16px}
+  .moment-starts>span{width:100%}.moment-starts{gap:8px}.moment-chips button{font-size:12px}
+  .moment-intent{align-items:flex-start}.moment-context{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}
+  .moment-context button{padding:9px 3px}
+  .moment-actions .moment-main-action{flex:1 0 100%}.moment-local-note{max-width:100%}
+  .moment-bottom{display:block;padding-top:24px}.moment-training-button{width:100%;margin-top:17px}
+  .moment-result h3{font-size:28px}.moment-script{padding:18px 16px 4px}
+  .moment-script-line.lead p{font-size:21px}.moment-script-line p{font-size:16px}
+  .moment-result-actions{display:block}.moment-result-actions button{width:100%;margin:4px 0}
+}
+
+.moment-browse{background:transparent;border:0;color:#a15f4a;font-size:12px;font-weight:800;padding:12px 8px;text-decoration:underline;text-underline-offset:4px;min-height:42px}
+.moment-browse:hover{color:#7c4d41}
+
+</style>
 </head>
 <body>
 <header>
@@ -17,6 +118,37 @@
  <div class="nav" role="tablist" aria-label="Training sections"><button class="selected" data-tab="today" id="navToday">Today’s session</button><button data-tab="program" id="navProgram">28-day programme</button><button data-tab="progress" id="navProgress">My progress</button><button data-tab="toolkit" id="navToolkit">Phrase toolkit</button><button data-tab="influence" id="navInfluence">Influence lab</button></div>
 </header>
 <main class="layout">
+ <section id="momentHome" aria-label="ClearSpeak personal coaching studio">
+  <div class="moment-shell">
+   <div class="moment-hero">
+    <div class="moment-overline"><span class="moment-spark">✦</span> <span id="momentOverline">YOUR WORDS, AT THEIR BEST</span></div>
+    <h2 id="momentHeadline">Make your point.<br><em>Feel heard.</em></h2>
+    <p id="momentDescription">For the moments when you know what you mean, but the words don't come easily.</p>
+    <div class="moment-intro-mark" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+   </div>
+   <div class="moment-editor" id="momentEditor">
+    <div class="moment-step"><span class="moment-step-round">01</span> <span id="momentLabel">What's on your mind?</span></div>
+    <label class="srOnly" for="momentText" id="momentTextLabel">What would you like to say?</label>
+    <textarea id="momentText" rows="5" placeholder="Just write it how it comes to you. It doesn't have to sound perfect."></textarea>
+    <div class="moment-starts"><span id="momentExampleTitle">Or start with a real-life example</span><div class="moment-chips"><button type="button" data-demo="meeting" id="momentExampleMeeting">A meeting</button><button type="button" data-demo="interruption" id="momentExampleInterruption">Being interrupted</button><button type="button" data-demo="personal" id="momentExamplePersonal">At home</button></div></div>
+    <div class="moment-intent"><span id="momentContextLabel">Where will you say it?</span><div class="moment-context" id="momentContexts"><button type="button" data-scene="meeting" class="on" aria-pressed="true" id="momentMeeting">Meeting</button><button type="button" data-scene="interruption" aria-pressed="false" id="momentInterruption">Interrupted</button><button type="button" data-scene="personal" aria-pressed="false" id="momentPersonal">Everyday</button></div></div>
+    <div class="moment-actions"><button class="moment-main-action" type="button" id="momentBuild"><span id="momentBuildText">Help me say it</span><span aria-hidden="true">↗</span></button><div class="moment-local-note" id="momentPrivacy">Your words stay in this browser session. No account needed.</div></div>
+    <div id="momentError" class="moment-error" role="alert" aria-live="polite"></div>
+   </div>
+   <div id="momentResult" class="moment-result hidden" aria-live="polite">
+    <div class="moment-result-heading"><span class="moment-kicker" id="momentDoneLabel">A clearer way to say it</span><button type="button" class="moment-text-button" id="momentEdit">← Edit my thought</button></div>
+    <h3 id="momentResultTitle">Here’s your message, with room to breathe.</h3>
+    <div class="moment-script" id="momentScript"></div>
+    <div class="moment-script-footer"><span id="momentTiming">Aim for about 20 seconds · speak steadily</span></div>
+    <div class="moment-result-actions"><button id="momentHear" class="moment-outline-action" type="button">▶ Hear the rhythm</button><button id="momentPractice" class="moment-main-action" type="button">Practise without reading ↗</button></div>
+    <div class="moment-cues hidden" id="momentCueBox"><div id="momentCueLead" class="moment-kicker">Now use only these cues:</div><div id="momentCueWords" class="moment-cue-words"></div><p id="momentCueNote">Speak naturally. You don't need to repeat the script word for word.</p><button type="button" class="moment-main-action" id="momentAgain">I said it — what next? ↗</button></div>
+    <div class="moment-feedback hidden" id="momentFeedback"><span id="momentFeedbackHeading">That is one repetition towards speaking more naturally.</span><p id="momentFeedbackTip">Next time, lead with the point and trust the pause.</p><button class="moment-outline-action" type="button" id="momentAnother">Another message</button></div>
+    <div class="moment-improvement"><span class="moment-kicker" id="momentImprovementTitle">WHAT CHANGED</span><p id="momentImprovementText">Your main point comes first. Supporting detail follows, and then the message ends.</p></div>
+    <p class="moment-honesty" id="momentHonesty">This is a guided, on-device reordering of your words, not an AI rewrite. Review the message before using it.</p>
+   </div>
+   <div class="moment-bottom"><div><span class="moment-bottom-eyebrow" id="momentBottomEyebrow">WHEN YOU WANT TO GO DEEPER</span><h3 id="momentBottomTitle">Build the skill, not just the script.</h3><p id="momentBottomText">Short guided practices help you find words, get to the point, and handle interruptions calmly.</p></div><button id="momentTraining" type="button" class="moment-training-button">Explore today's practice <span>↗</span></button><button id="momentBrowse" type="button" class="moment-browse">Browse all 28 lessons</button></div>
+  </div>
+ </section>
  <section id="todayTab">
   <div class="hero">
    <div class="panel"><div class="row space"><span class="tag" id="todayTag">WEEK 1 · DAY 1</span><span class="muted small" id="todayTiming">20-minute session</span></div><h2 id="todayTitle" style="margin-top:12px">Start with the conclusion</h2><p class="muted" id="todayGoal">Get to your main message before the background.</p><div class="instruction" id="todayChallenge">Say your conclusion within the first 10 seconds.</div><div class="row" style="margin-top:14px"><button class="secondary" type="button" id="prevDay">← Previous day</button><button class="secondary" type="button" id="nextDay">Next day →</button></div></div>
@@ -37,5 +169,239 @@
 <script src="trainer.js?v=2" defer></script>
 <script src="influence.js?v=2" defer></script>
 <script src="simple.js?v=2" defer></script>
+<script>
+window.addEventListener("DOMContentLoaded", ()=>{
+/* ClearSpeak Moment — emotionally engaging, single-purpose speaking studio.
+   All script shaping is local and rule-based. No data upload, no pretending to use AI. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  if (!$('momentHome')) return;
+  const copy = {
+    en: {
+      nav:'Coach',train:'Train',growth:'My growth',over:'PRACTISE FOR REAL CONVERSATIONS',
+      hero:'Make your point.',heroEm:'Feel heard.',desc:'For moments when you know what you mean, but the words don’t come easily.',
+      label:'What do you want to say?',placeholder:'Write it exactly as it comes to you. It doesn’t have to sound perfect.',
+      examples:'Try a real-life example',demoMeeting:'A meeting',demoInterrupt:'Being interrupted',demoPersonal:'At home',
+      context:'Where will you say it?',meeting:'At work',interrupt:'Interrupted',personal:'Everyday',
+      build:'Help me say it',privacy:'Your message stays on this screen. No account or upload.',
+      error:'Write a thought or choose an example above.',done:'YOUR CLEARER VERSION',edit:'← Back to my words',
+      resultTitle:'Same idea. More room to be heard.',pause:'PAUSE · LET IT LAND',
+      hear:'▶ Hear the rhythm',stopHear:'■ Stop audio',practice:'Practise without reading ↗',
+      cueLead:'Now use only these cues:',cueNote:'Say it your way, not word for word. The pause is part of the practice.',
+      again:'I said it — what next? ↗',feedback:'You’ve practised once. That counts.',feedbackTip:'Next time, put your main point first and give it a moment to land.',another:'Another message',
+      improved:'WHY THIS IS CLEARER',improvedSentence:'The main point comes first. One supporting thought comes next. Then you stop rather than explaining everything.',
+      honest:'This is a simple, on-device guide that organizes your words. It is not yet an AI rewrite; always review the wording.',
+      bottomEyebrow:'WHEN YOU WANT TO GO DEEPER',bottomTitle:'Build the skill, not just the script.',
+      bottomText:'Little by little, make clear speaking feel natural—even when you’re interrupted.',bottomBtn:'Do a short practice ↗',browse:'Browse 28 lessons',
+      timings:'Aim for about {s} seconds · speak steadily',
+      notSupported:'Audio playback is not available in this browser.',
+      usedToday:'You’ve practised {n} time(s) here.',
+      introInterrupt:'One moment, I’d like to finish this thought.',
+      bridgeMeeting:'I’d like us to make that a priority.',
+      bridgePersonal:'Could we talk about that together?',
+      bridgeInterrupt:'That is the point I wanted to complete.',
+      demo1:'I want every country office to prepare for anticipated emergencies because delays in responding can cost money, time and lives.',
+      demo2:'I want to finish what I am saying because the point I am making is important to the decision.',
+      demo3:'I would like us to plan the weekend earlier because it makes the day easier for everyone.',
+      noReason:'Keep just this one point; you don’t need to add details to justify it.',
+      hadReason:'Your supporting reason now has its own space instead of competing with your main point.',
+      tipShort:'Keep your first sentence as the headline. Stop after the request.',
+      speechCue:'Your point', reasonCue:'Your reason',finishCue:'Your close',
+    },
+    ar: {
+      nav:'المدرب',train:'التدريب',growth:'تقدمي',over:'تدرب على مواقف حقيقية',
+      hero:'عبّر عن فكرتك.',heroEm:'وخلي صوتك يوصل.',desc:'للأوقات التي تعرف فيها ما تريد قوله، لكن الكلمات لا تأتي بسهولة.',
+      label:'شو بدك تقول؟',placeholder:'اكتب فكرتك كما تخطر في بالك. ليس ضرورياً أن تكون مرتبة.',
+      examples:'أو جرّب مثالاً من الحياة',demoMeeting:'في اجتماع',demoInterrupt:'وقت المقاطعة',demoPersonal:'في البيت',
+      context:'أين ستقولها؟',meeting:'في العمل',interrupt:'وقت المقاطعة',personal:'في الحياة اليومية',
+      build:'ساعدني أوصل فكرتي',privacy:'كلامك يبقى على هذه الشاشة. لا يحتاج حساباً أو رفعاً.',
+      error:'اكتب فكرة أو اختر مثالاً أولاً.',done:'نسخة أوضح من فكرتك',edit:'→ عدّل كلامي',
+      resultTitle:'نفس الفكرة. بطريقة تسمعها الناس.',pause:'وقفة قصيرة · دع الفكرة تصل',
+      hear:'▶ اسمع الإيقاع',stopHear:'■ أوقف الصوت',practice:'تدرّب من دون قراءة ↗',
+      cueLead:'الآن تذكّر فقط هذه النقاط:',cueNote:'قلها بطريقتك، وليس بالحفظ. الوقفة جزء من التدريب.',
+      again:'قلت الفكرة — وماذا بعد؟ ↗',feedback:'تدرّبت مرة. وهذا بحد ذاته تقدم.',feedbackTip:'المرة القادمة ابدأ بالخلاصة، وتوقف لحظة حتى تصل فكرتك.',another:'فكرة أخرى',
+      improved:'لماذا أصبحت أوضح؟',improvedSentence:'تبدأ بالفكرة الأساسية، ثم سبب واحد، ثم تتوقف بدل أن تشرح كل التفاصيل.',
+      honest:'هذا تنظيم مبسّط لكلامك على جهازك، وليس إعادة صياغة بالذكاء الاصطناعي حتى الآن. راجع النص قبل استخدامه.',
+      bottomEyebrow:'لما تحب تتطور أكثر',bottomTitle:'درّب قدرتك، مش بس النص.',
+      bottomText:'تدريبات قصيرة لتصبح أكثر وضوحاً وهدوءاً حتى وقت المقاطعة.',bottomBtn:'ابدأ تدريباً قصيراً ↗',browse:'جميع الدروس الـ٢٨',
+      timings:'حوالي {s} ثانية · تكلم بهدوء',
+      notSupported:'تشغيل الصوت غير متاح في هذا المتصفح.',
+      usedToday:'تدرّبت هنا {n} مرة.',
+      introInterrupt:'لحظة من فضلك، أود أن أكمل فكرتي.',
+      bridgeMeeting:'هذه هي الفكرة التي أود أن نناقشها.',
+      bridgePersonal:'هل يمكننا أن نتحدث عن هذا معاً؟',
+      bridgeInterrupt:'هذه هي النقطة التي أردت إكمالها.',
+      demo1:'أريد أن تستعد كل المكاتب القطرية للطوارئ المتوقعة، لأن التأخر في الاستجابة قد يكلف المال والوقت والأرواح.',
+      demo2:'أريد أن أكمل كلامي لأن النقطة التي أشرحها مهمة للقرار الذي نتخذه.',
+      demo3:'أود أن نخطط لعطلة نهاية الأسبوع مبكراً لأن ذلك يجعل يومنا أسهل للجميع.',
+      noReason:'ابقَ عند هذه الفكرة ولا تضف تفاصيل لمجرد تبريرها.',
+      hadReason:'صار للسبب مساحة واضحة بدلاً من أن يختلط بالفكرة الأساسية.',
+      tipShort:'اجعل أول جملة هي الخلاصة، وتوقف بعد الطلب.',
+      speechCue:'الفكرة',reasonCue:'السبب',finishCue:'الخاتمة'
+    }
+  };
+  const state={scene:'meeting',segments:[],result:'',count:0};
+  let speechOn=false;
+  const L=()=>copy[(typeof lang!=='undefined'&&lang==='ar')?'ar':'en'];
+  const isAr=()=>typeof lang!=='undefined'&&lang==='ar';
+  const text=(id,value)=>{const e=$(id);if(e)e.textContent=value;};
+  const setHidden=(id,hide)=>$(id)?.classList.toggle('hidden',hide);
+  const clean=s=>String(s||'').replace(/\s+/g,' ').trim().replace(/[.!?؟،؛\s]+$/,'');
+  const cap=s=>s?s.charAt(0).toLocaleUpperCase()+s.slice(1):s;
+  const punct=s=>{const v=clean(s);return /[.!?؟]$/.test(v)?v:v+'.';};
+  const wordcount=s=>(s.match(/[\p{L}\p{N}]+/gu)||[]).length;
+
+  function renderLanguage(){
+    const t=L();
+    if(document.body.classList.contains('coachLanding'))text('headerDesc',isAr()?'كل يوم أوضح شوي.':'A little clearer, every day.');
+    const map={navMoment:t.nav,navToday:t.train,navProgress:t.growth,momentOverline:t.over,momentDescription:t.desc,
+      momentLabel:t.label,momentTextLabel:t.label,momentExampleTitle:t.examples,momentExampleMeeting:t.demoMeeting,
+      momentExampleInterruption:t.demoInterrupt,momentExamplePersonal:t.demoPersonal,momentContextLabel:t.context,
+      momentMeeting:t.meeting,momentInterruption:t.interrupt,momentPersonal:t.personal,momentBuildText:t.build,
+      momentPrivacy:t.privacy,momentDoneLabel:t.done,momentEdit:t.edit,momentResultTitle:t.resultTitle,
+      momentHear:speechOn?t.stopHear:t.hear,momentPractice:t.practice,momentCueLead:t.cueLead,
+      momentCueNote:t.cueNote,momentAgain:t.again,momentFeedbackHeading:t.feedback,momentFeedbackTip:t.feedbackTip,
+      momentAnother:t.another,momentImprovementTitle:t.improved,momentHonesty:t.honest,
+      momentBottomEyebrow:t.bottomEyebrow,momentBottomTitle:t.bottomTitle,momentBottomText:t.bottomText,momentTraining:t.bottomBtn,momentBrowse:t.browse};
+    for(const [id,value] of Object.entries(map))text(id,value);
+    $('momentHeadline').innerHTML=isAr()?'عبّر عن فكرتك.<br><em>وخلي صوتك يوصل.</em>':'Make your point.<br><em>Feel heard.</em>';
+    $('momentText').placeholder=t.placeholder;
+    if(state.result)paintScript();
+  }
+  function chooseScene(scene){
+    if(!['meeting','interruption','personal'].includes(scene))return;
+    state.scene=scene;
+    document.querySelectorAll('#momentContexts button').forEach(b=>{
+      const active=b.dataset.scene===scene;b.classList.toggle('on',active);b.setAttribute('aria-pressed',String(active));
+    });
+  }
+  function showCoach(){
+    document.body.classList.add('coachLanding');
+    $('momentHome').classList.remove('hidden');
+    document.querySelectorAll('.simpleNav button').forEach(b=>b.classList.toggle('selected',b.id==='navMoment'));
+    renderLanguage();window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function showLegacy(tab){
+    document.body.classList.remove('coachLanding');
+    $('momentHome').classList.add('hidden');
+    if(typeof window.changeTab==='function')window.changeTab(tab);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function demo(which){
+    const t=L();const index={meeting:1,interruption:2,personal:3}[which]||1;
+    chooseScene(which);$('momentText').value=t['demo'+index];$('momentError').textContent='';
+    $('momentText').focus();
+  }
+  function splitThought(raw){
+    let s=clean(raw).replace(/^(um+|uh+|actually|basically|you know|يعني|أمم+)\s*[,،]?\s*/i,'');
+    const l=L();
+    // Preserve user meaning: only split on explicit connectives. No factual additions or AI assumptions.
+    const connector=isAr()? /\s+(?:لأن|لانه|لإن|بسبب)\s+/ : /\s+because\s+/i;
+    const split=s.split(connector);
+    let main='',reason='',close='';
+    if(split.length>1){main=clean(split.shift());reason=clean(split.join(isAr()?' لأن ':' because '));}
+    else{
+      const sentences=s.split(/(?<=[.!?؟؛])\s+/).filter(Boolean);
+      main=clean(sentences.shift()||s);
+      reason=clean(sentences.shift()||'');
+      close=clean(sentences.join(' ')||'');
+    }
+    if(!main)main=s;
+    if(!isAr()&&state.scene==='meeting'){
+      main=main.replace(/^I want (every country office|all country offices) to ([a-z]+)/i,(_,who,verb)=>'I recommend that '+who+' '+verb);
+      main=main.replace(/^I want us to ([a-z]+)/i,(_,verb)=>'I recommend we '+verb);
+      main=main.replace(/^I would like\s+/i,'I suggest ');
+    }
+    if(isAr()&&state.scene==='meeting')main=main.replace(/^أريد أن\s*/,'أوصي بأن ');
+    // If the statement is very long, keep the first words unaltered, so meaning is not lost.
+    const intro=state.scene==='interruption'?l.introInterrupt:'';
+    const bridge=state.scene==='interruption'?l.bridgeInterrupt:state.scene==='personal'?l.bridgePersonal:l.bridgeMeeting;
+    return {intro,main,reason,close,bridge};
+  }
+  function build(){
+    const input=clean($('momentText').value);
+    if(!input){text('momentError',L().error);$('momentText').focus();return;}
+    text('momentError','');
+    state.segments=splitThought(input);
+    const x=state.segments;
+    state.result=[x.intro,x.main,x.reason,x.close,x.bridge].filter(Boolean).map(v=>punct(v)).join(' ');
+    $('momentEditor').classList.add('hidden');$('momentResult').classList.remove('hidden');
+    setHidden('momentCueBox',true);setHidden('momentFeedback',true);
+    paintScript();
+    $('momentResult').scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  function paintScript(){
+    const t=L();const x=state.segments;const root=$('momentScript');root.replaceChildren();
+    const lines=[
+      ...(x.intro?[{tag:'',value:x.intro,kind:'intro'}]:[]),
+      {tag:t.speechCue,value:x.main,kind:'lead'},
+      ...(x.reason?[{tag:t.reasonCue,value:x.reason,kind:'support'}]:[]),
+      ...(x.close?[{tag:'',value:x.close,kind:'support'}]:[]),
+      {tag:t.finishCue,value:x.bridge,kind:'close'}
+    ].filter(item=>item.value);
+    for(const [i,item] of lines.entries()){
+      const div=document.createElement('div');div.className='moment-script-line '+item.kind;
+      if(item.tag){const lbl=document.createElement('span');lbl.className='moment-line-tag';lbl.textContent=item.tag;div.append(lbl)}
+      const p=document.createElement('p');p.textContent=punct(item.value);div.append(p);root.append(div);
+      if(i!==lines.length-1){const pause=document.createElement('div');pause.className='moment-pause';pause.textContent=t.pause;root.append(pause)}
+    }
+    const seconds=Math.max(8,Math.ceil(wordcount(state.result)/2.3)+Math.min(lines.length-1,3));
+    text('momentTiming',t.timings.replace('{s}',seconds));
+    text('momentImprovementText',x.reason?t.hadReason:t.noReason);
+    const cues=$('momentCueWords');cues.replaceChildren();
+    [x.main,x.reason||x.close,x.bridge].filter(Boolean).forEach(str=>{
+      const b=document.createElement('span');b.textContent=(str.match(/[\p{L}\p{N}]+/gu)||[]).slice(0,isAr()?4:5).join(' ');cues.append(b);
+    });
+  }
+  function hear(){
+    const t=L();
+    if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){text('momentTiming',t.notSupported);return;}
+    if(speechOn){window.speechSynthesis.cancel();speechOn=false;renderLanguage();return;}
+    const utterance=new SpeechSynthesisUtterance(state.result);
+    utterance.lang=isAr()?'ar':'en-US';utterance.rate=.91;utterance.pitch=1;
+    utterance.onend=utterance.onerror=()=>{speechOn=false;renderLanguage()};
+    speechOn=true;renderLanguage();window.speechSynthesis.speak(utterance);
+  }
+  function newAttempt(){
+    if('speechSynthesis' in window)window.speechSynthesis.cancel();speechOn=false;
+    $('momentResult').classList.add('hidden');$('momentEditor').classList.remove('hidden');
+    $('momentText').value='';state.segments=[];state.result='';
+    $('momentText').focus();$('momentEditor').scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  $('navMoment').addEventListener('click',showCoach);
+  for(const id of ['navToday','navProgress','navProgram'])$(id)?.addEventListener('click',()=>{
+    document.body.classList.remove('coachLanding');$('momentHome').classList.add('hidden');
+  });
+  $('momentBuild').addEventListener('click',build);
+  $('momentText').addEventListener('input',()=>text('momentError',''));
+  $('momentText').addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key==='Enter')build()});
+  document.querySelectorAll('#momentContexts button').forEach(b=>b.addEventListener('click',()=>chooseScene(b.dataset.scene)));
+  document.querySelectorAll('[data-demo]').forEach(b=>b.addEventListener('click',()=>demo(b.dataset.demo)));
+  $('momentEdit').addEventListener('click',()=>{
+    $('momentResult').classList.add('hidden');$('momentEditor').classList.remove('hidden');
+    $('momentEditor').scrollIntoView({block:'start',behavior:'smooth'});
+  });
+  $('momentHear').addEventListener('click',hear);
+  $('momentPractice').addEventListener('click',()=>{
+    setHidden('momentCueBox',false);$('momentCueBox').scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+  $('momentAgain').addEventListener('click',()=>{
+    state.count++;
+    try{localStorage.setItem('cs_moment_count',String(state.count))}catch(_){/* no storage needed */}
+    setHidden('momentFeedback',false);text('momentFeedbackHeading',L().usedToday.replace('{n}',state.count).replace('1 time(s)','once').replace(/(\d+) time\(s\)/,'$1 times'));
+    $('momentFeedback').scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+  $('momentAnother').addEventListener('click',newAttempt);
+  $('momentTraining').addEventListener('click',()=>showLegacy('today'));
+  $('momentBrowse')?.addEventListener('click',()=>showLegacy('program'));
+  for(const id of ['enBtn','arBtn'])$(id).addEventListener('click',()=>{renderLanguage(); if(document.body.classList.contains('coachLanding'))document.querySelectorAll('.simpleNav button').forEach(b=>b.classList.toggle('selected',b.id==='navMoment'))});
+  // Existing lesson pages continue to be accessible; the Coach is a welcoming first screen.
+  try{state.count=Number(localStorage.getItem('cs_moment_count'))||0}catch(_){state.count=0}
+  chooseScene('meeting');showCoach();
+})();
+
+});
+</script>
 </body>
 </html>
