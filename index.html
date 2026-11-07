@@ -10,14 +10,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ClearSpeak">
 <title>ClearSpeak — Your words, easier to say.</title>
-<link rel="stylesheet" href="light.css?v=1">
-<script src="light.js?v=1" defer></script>
+<link rel="stylesheet" href="light.css?v=3">
+<script src="light.js?v=3" defer></script>
 </head>
 <body>
 <div class="appShell">
   <header class="topbar">
     <a class="brand" href="./" aria-label="ClearSpeak home"><span class="mark" aria-hidden="true"><span class="mark-line"></span><span class="mark-dot"></span></span><span>clear<span class="brand-bold">speak</span><span class="brand-end">.</span></span></a>
-    <div class="topright"><button type="button" id="langButton" class="lang-btn" aria-label="Switch language">عربي</button><a class="train-link" href="training.html" id="trainLink">My training <span aria-hidden="true">↗</span></a></div>
+    <div class="topright"><button type="button" id="langButton" class="lang-btn" aria-label="Switch language">عربي</button><button type="button" class="train-link" id="trainLink">My training <span aria-hidden="true">↗</span></button></div>
   </header>
   <main>
     <section id="entry" class="screen entry-screen">
@@ -63,10 +63,45 @@
       <button type="button" id="startTimer" class="primary-btn"><span data-t="start">Start speaking</span><span aria-hidden="true" class="arrow">▶</span></button>
       <div class="secondary-actions"><button type="button" class="text-action" id="resetTimer" data-t="reset">Reset timer</button><button type="button" class="text-action" id="showScript" data-t="showScript">Show script</button></div>
       <div id="reveal" class="reveal-script" hidden></div>
-      <div class="practice-finish" id="finish" hidden><p data-t="finish">Did your main point come first?</p><div class="feeling-actions"><button type="button" class="feeling" id="yes" data-t="yes">Yes, it did</button><button type="button" class="feeling" id="again" data-t="again">Not yet — retry</button></div><p id="finishMessage" role="status"></p></div>
+      <button type="button" id="doneSpeaking" class="done-speaking"><span data-t="doneSpeaking">I’ve finished speaking</span> <span aria-hidden="true">→</span></button><p id="timerHint" class="timer-hint" aria-live="polite" data-t="timerHint">You can finish whenever you’re ready.</p>
+    </section>
+
+    <section id="checkin" class="screen checkin-screen" hidden>
+      <button type="button" class="back-link" id="backCheckin"><span aria-hidden="true">←</span> <span data-t="backPracticeShort">Back to practice</span></button>
+      <div class="small-welcome"><span class="tiny-star" aria-hidden="true">✳</span> <span data-t="checkEyebrow">A MOMENT TO REFLECT</span></div>
+      <h1><span data-t="checkTitle">You did it.</span><br><em data-t="checkTitle2">Keep going.</em></h1>
+      <p class="practice-intro" data-t="checkIntro">How did it feel to say your message in your own words?</p>
+      <div class="feeling-choice" role="group" aria-label="Practice reflection">
+        <button type="button" class="rating" data-feeling="easy" data-t="feelEasy">Clear and comfortable</button>
+        <button type="button" class="rating" data-feeling="okay" data-t="feelOkay">A little hesitant</button>
+        <button type="button" class="rating" data-feeling="hard" data-t="feelHard">I struggled</button>
+      </div>
+      <div class="coaching-card" id="coachTip" hidden aria-live="polite">
+        <span class="small-welcome" data-t="nextFocus">FOR YOUR NEXT TRY</span>
+        <p id="coachAdvice"></p>
+        <span class="honest-label" data-t="selfReported">Based on your reflection, not an analysis of your voice.</span>
+      </div>
+      <button type="button" id="nextAction" class="primary-btn" disabled><span data-t="nextThought">Try another thought</span><span aria-hidden="true" class="arrow">→</span></button>
+      <button type="button" id="retrySpeaking" class="quiet-btn" data-t="retrySpeak">Say it once more</button>
+    </section>
+
+    <section id="training" class="screen training-screen" hidden>
+      <button type="button" class="back-link" id="backTraining"><span aria-hidden="true">←</span> <span data-t="trainingBack">Back to speaking help</span></button>
+      <div class="small-welcome"><span class="tiny-star" aria-hidden="true">✳</span> <span data-t="trainingEyebrow">YOUR GENTLE DAILY PRACTICE</span></div>
+      <h1><span data-t="trainingTitle">One small step.</span><br><em data-t="trainingTitle2">A stronger voice.</em></h1>
+      <p class="practice-intro" data-t="trainingIntro">Three short speaking moments, one at a time. No scores, no pressure.</p>
+      <div class="daily-card">
+        <div class="daily-top"><span id="trainingProgress" class="daily-progress">Today · 0 of 3</span><div class="daily-dots" id="dailyDots" aria-hidden="true"><span></span><span></span><span></span></div></div>
+        <div class="daily-illustration" aria-hidden="true">✳</div>
+        <h2 id="dailyTitle">Start with the point</h2>
+        <p id="dailyDescription">Practise one clear idea in a professional meeting.</p>
+        <div id="dailyNudge" class="daily-nudge">One idea is enough.</div>
+        <button type="button" id="launchTraining" class="primary-btn"><span id="trainingAction">Begin this moment</span><span aria-hidden="true" class="arrow">→</span></button>
+        <p class="daily-disclaimer" data-t="trainingPrivacy">Your daily progress stays in this browser.</p>
+      </div>
     </section>
   </main>
-  <footer class="footer"><span data-t="footer">One clear thought at a time.</span> <a href="training.html" data-t="footerTrain">Explore the 28-day programme</a></footer>
+  <footer class="footer"><span data-t="footer">One clear thought at a time.</span> <button type="button" id="footerTrain" class="footer-button" data-t="footerTrain">A little practice every day</button></footer>
 </div>
 </body>
 </html>
