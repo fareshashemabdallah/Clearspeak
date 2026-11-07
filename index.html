@@ -10,8 +10,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ClearSpeak">
 <title>ClearSpeak — Your words, easier to say.</title>
-<link rel="stylesheet" href="light.css?v=3">
-<script src="light.js?v=3" defer></script>
+<link rel="stylesheet" href="light.css?v=4">
+<script src="voice.js?v=1" defer></script>
+<script src="light.js?v=4" defer></script>
 </head>
 <body>
 <div class="appShell">
@@ -59,10 +60,15 @@
       <h1><span data-t="practiceTitle1">Say it</span><br><em data-t="practiceTitle2">without reading.</em></h1>
       <p class="practice-intro" data-t="practiceIntro">Remember only these three cues. Speak naturally; you don't need to repeat the script word for word.</p>
       <div id="cues" class="cueList"></div>
+      <div id="speakingFocus" class="speaking-focus" role="group" aria-label="Speaking focus">
+        <div class="focus-left"><span id="voiceFocusLabel" class="focus-title">SAY THIS CLEARLY</span><strong id="voiceFocusWord" class="focus-word">Preparedness</strong><p id="voiceFocusHelp" class="focus-help">Slowly → naturally → in your sentence.</p></div>
+        <div class="focus-buttons"><button type="button" id="hearWord" class="focus-action">◖)) Hear word</button><button type="button" id="nextWord" class="focus-next">Another word</button></div>
+      </div>
       <div class="practice-count"><span id="countdown">20</span><span data-t="seconds">seconds</span></div>
       <button type="button" id="startTimer" class="primary-btn"><span data-t="start">Start speaking</span><span aria-hidden="true" class="arrow">▶</span></button>
       <div class="secondary-actions"><button type="button" class="text-action" id="resetTimer" data-t="reset">Reset timer</button><button type="button" class="text-action" id="showScript" data-t="showScript">Show script</button></div>
       <div id="reveal" class="reveal-script" hidden></div>
+      <p id="micState" class="mic-note" aria-live="polite">With microphone permission, you can listen to your own attempt.</p>
       <button type="button" id="doneSpeaking" class="done-speaking"><span data-t="doneSpeaking">I’ve finished speaking</span> <span aria-hidden="true">→</span></button><p id="timerHint" class="timer-hint" aria-live="polite" data-t="timerHint">You can finish whenever you’re ready.</p>
     </section>
 
@@ -71,6 +77,13 @@
       <div class="small-welcome"><span class="tiny-star" aria-hidden="true">✳</span> <span data-t="checkEyebrow">A MOMENT TO REFLECT</span></div>
       <h1><span data-t="checkTitle">You did it.</span><br><em data-t="checkTitle2">Keep going.</em></h1>
       <p class="practice-intro" data-t="checkIntro">How did it feel to say your message in your own words?</p>
+      <div id="voiceReview" class="voice-review" hidden>
+        <strong id="voiceReviewTitle">Listen to your attempt</strong>
+        <p id="voiceReviewDesc">Notice one thing: was your key word clear, and did you finish confidently?</p>
+        <audio id="voiceAudio" controls preload="none" aria-label="Your speaking recording"></audio>
+        <p id="voiceReviewTip" class="voice-fineprint">Playback is for reflection—not an automated pronunciation score.</p>
+      </div>
+      <details id="recognitionPanel" class="recognition-panel" hidden><summary id="recognitionSummary">Check spoken words (optional)</summary><p id="recognitionHint">This may use your browser’s online speech service.</p><button type="button" id="recognitionStart" class="focus-action">Speak your sentence again</button><p id="heardWords" hidden></p><p id="speechTip" role="status"></p></details>
       <div class="feeling-choice" role="group" aria-label="Practice reflection">
         <button type="button" class="rating" data-feeling="easy" data-t="feelEasy">Clear and comfortable</button>
         <button type="button" class="rating" data-feeling="okay" data-t="feelOkay">A little hesitant</button>
