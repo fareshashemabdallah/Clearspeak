@@ -37,3 +37,15 @@ html[lang="ar"] body{font-family:"Geeza Pro","Tahoma","Arial",sans-serif}html[la
 html[lang="ar"] .daily-card h2{font-family:"Geeza Pro",Tahoma,sans-serif;letter-spacing:0}
 html[lang="ar"] .daily-nudge{border-left:0;border-right:3px solid #E3A18B;border-radius:8px 0 0 8px}
 @media(max-width:520px){.training-screen,.checkin-screen{padding-top:13px}.training-screen h1,.checkin-screen h1{font-size:49px;margin:25px 0 18px}.daily-card{padding:22px}.daily-card h2{font-size:27px}.feeling-choice{grid-template-columns:1fr;gap:8px}.rating{min-height:52px}.coaching-card{padding:21px}}
+
+/* ClearSpeak voice moment: a single focused drill, optional replay, no extra navigation */
+.speaking-focus{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;margin:20px 0 6px;background:#fff5ee;border:1px solid #f0dfd4;border-radius:18px}
+.focus-left{min-width:0}.focus-title{display:block;letter-spacing:1.2px;font-size:10px;font-weight:800;color:#9a6152;margin-bottom:7px}.focus-word{display:block;font-family:Georgia,serif;font-size:clamp(20px,3.1vw,27px);font-weight:500;overflow-wrap:anywhere}.focus-help{font-size:12px;color:var(--ink2);line-height:1.5;margin:6px 0 0}.focus-buttons{display:flex;gap:5px;flex-direction:column;align-items:flex-end;min-width:115px}
+.focus-action{font-size:12px;font-weight:700;padding:9px 12px;border-radius:11px;background:white;border:1px solid #d9d9d0;color:var(--ink);white-space:nowrap}.focus-next{font-size:11px;background:none;border:0;color:#805848;text-decoration:underline;padding:6px}.speaking-focus.focus-less .focus-word,.speaking-focus.focus-less .focus-next{display:none}
+.mic-note{text-align:center;font-size:11px;color:var(--ink2);margin:13px 0 16px;line-height:1.6;max-width:390px;margin-inline:auto}
+.voice-review{padding:19px 18px;background:#fff5ee;border:1px solid #f0dfd4;border-radius:17px;margin:8px 0 20px}.voice-review strong{font-size:16px}.voice-review p{font-size:13px;color:var(--ink2);line-height:1.55}.voice-review audio{display:block;width:100%;max-width:450px;margin-top:12px}.voice-review .voice-fineprint{font-size:11px;margin-bottom:0}
+.recognition-panel{margin:5px 0 22px;border-top:1px solid var(--line);padding:13px 0 3px;color:var(--ink2);font-size:12px}.recognition-panel summary{font-weight:700;cursor:pointer;color:var(--ink);min-height:34px}.recognition-panel p{line-height:1.6}.recognition-panel .focus-action{white-space:normal}.recognition-panel #heardWords{background:#fff;padding:11px;border-radius:9px;overflow-wrap:anywhere}
+[dir="rtl"] .focus-buttons{align-items:flex-start}
+@media(max-width:520px){.speaking-focus{padding:15px;gap:9px;margin:16px 0 8px}.focus-word{font-size:21px}.focus-buttons{min-width:100px}.focus-action{padding:8px 9px;font-size:11px}.focus-help{font-size:11px}.voice-review{padding:16px 15px}}
+
+.speaking-focus.focus-less .focus-buttons{display:none}
