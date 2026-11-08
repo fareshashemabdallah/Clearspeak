@@ -10,13 +10,30 @@
  const html='<section id="conversationScreen" class="screen csconv" hidden aria-labelledby="convTitle">'+
  '<button type="button" id="convBack" class="back-link">← Back to ClearSpeak</button>'+
  '<div class="small-welcome">✳ &nbsp; FEEL COMFORTABLE CONNECTING</div>'+
- '<h1 id="convTitle">Start a <em>conversation.</em></h1>'+
- '<p class="csconv-sub">An introduction, a real reply, and what to say next. One exchange at a time.</p>'+
- '<div id="convChooser"><p class="csconv-question">What would you like to practise?</p><div class="csconv-choices">'+
- '<button type="button" data-conv="meet"><span class="csconv-symbol">✳</span><strong>Meet someone</strong><small>In person</small></button>'+
- '<button type="button" data-conv="call"><span class="csconv-symbol">☎</span><strong>Make a call</strong><small>On the phone</small></button>'+
- '<button type="button" data-conv="chat"><span class="csconv-symbol">✉</span><strong>Start a chat</strong><small>By message</small></button>'+
- '</div></div>'+
+ '<h1 id="convTitle">Tell me the <em>situation.</em></h1>'+
+ '<p class="csconv-sub">Who do you want to speak to, and why? Just a sentence or two is enough.</p>'+
+ '<div id="convChooser"><label class="csconv-question" for="convSituation">What is happening?</label>'+
+ '<textarea id="convSituation" rows="4" maxlength="750" placeholder="I met someone at a conference. I would like to reconnect, but I am not sure how to start…"></textarea>'+
+ '<p class="csconv-channel-label">How will you connect?</p><div class="csconv-choices">'+
+ '<button type="button" data-conv="meet" class="selected" aria-pressed="true"><span class="csconv-symbol">✳</span><strong>In person</strong></button>'+
+ '<button type="button" data-conv="call" aria-pressed="false"><span class="csconv-symbol">☎</span><strong>Phone call</strong></button>'+
+ '<button type="button" data-conv="chat" aria-pressed="false"><span class="csconv-symbol">✉</span><strong>Message</strong></button>'+
+ '</div><div class="csconv-examples"><span>Try an example</span>'+
+ '<button type="button" data-example="conference">After an event</button><button type="button" data-example="school">Another parent</button>'+
+ '<button type="button" data-example="work">New colleague</button></div>'+
+ '<p id="convSetupStatus" class="csconv-notice" role="status"></p>'+
+ '<button type="button" id="convPrepare" class="primary-btn">Guide me →</button>'+
+ '<p class="csconv-disclaimer">Guided examples work without AI. When connected, your description is sent to a secure AI coaching service.</p></div>'+
+ '<div id="convPlan" hidden>'+
+ '<button type="button" class="back-link" id="convEdit">← Edit the situation</button>'+
+ '<p class="csconv-context" id="convPlanContext"></p>'+
+ '<div class="csconv-card"><span class="csconv-eyebrow">A natural way to start</span><p id="convOpener"></p>'+
+ '<button type="button" id="convOther" class="csconv-use">Try a different opening ↻</button></div>'+
+ '<div class="csconv-plan-list"><div><span class="csconv-eyebrow">If they respond</span><p id="convFollowOne"></p></div>'+
+ '<div><span class="csconv-eyebrow">Keep it mutual</span><p id="convFollowTwo"></p></div>'+
+ '<div><span class="csconv-eyebrow">Close naturally</span><p id="convClosing"></p></div></div>'+
+ '<p id="convPlanSource" class="csconv-disclaimer"></p>'+
+ '<button type="button" id="convPractice" class="primary-btn">Practise the conversation →</button></div>'+
  '<div id="convActive" hidden>'+
  '<div class="csconv-context"><span id="convLabel"></span><span id="convStep"></span></div>'+
  '<p id="convScene" class="csconv-scene"></p>'+
@@ -38,30 +55,99 @@
  const main=document.querySelector('main'),home=$('entry');
  if(!main||!home)return;
  main.insertAdjacentHTML('beforeend',html);
- const trigger=document.createElement('button');trigger.type='button';trigger.id='conversationOpen';trigger.className='csconv-home';trigger.innerHTML='<span class="csconv-home-icon">✳</span><span><strong>Start a conversation</strong><small>Meet someone, make a call, or start a chat</small></span><span aria-hidden="true">→</span>';
+ const trigger=document.createElement('button');trigger.type='button';trigger.id='conversationOpen';trigger.className='csconv-home';trigger.innerHTML='<span class="csconv-home-icon">✳</span><span><strong>Start a conversation</strong><small>Describe your situation. Find natural words.</small></span><span aria-hidden="true">→</span>';
  const beneath=home.querySelector('.beneath');
  if(beneath) beneath.insertAdjacentElement('afterend',trigger);else home.append(trigger);
  const endpoint=String(window.CS_COACH_API_URL||'').trim().replace(/\/$/,'');
  const aiReady=/^https:\/\/[a-z0-9.-]+(?:\/[a-z0-9/_-]+)?$/i.test(endpoint);
- const state={scene:null,turn:0,history:[],userLines:[],busy:false,aiFailed:false,recognizer:null,session:0};
+ const state={scene:'meet',situation:'',plan:null,alternate:false,manualChannel:false,turn:0,history:[],userLines:[],busy:false,aiFailed:false,recognizer:null,session:0};
  function msg(role,line){const box=document.createElement('div');box.className='csconv-message '+(role==='you'?'csconv-you':'csconv-other');const cap=document.createElement('span');cap.textContent=role==='you'?'You':'The other person';const p=document.createElement('p');p.textContent=line;box.append(cap,p);$('convMessages').append(box);$('convMessages').scrollTop=$('convMessages').scrollHeight}
  function status(t){$('convNotice').textContent=t}
  function setStage(open){document.body.classList.toggle('csconv-open',open);$('conversationScreen').hidden=!open; if(open){$('entry').hidden=true; window.scrollTo(0,0)}else{stopVoice();$('entry').hidden=false;window.scrollTo(0,0)} }
  function stopVoice(){if(state.recognizer){try{state.recognizer.abort()}catch(_){}state.recognizer=null}}
- function open(){state.session++;state.busy=false;state.scene=null;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;$('convChooser').hidden=false;$('convActive').hidden=true;$('convDone').hidden=true;$('convMessages').replaceChildren();$('convPrivacy').textContent=aiReady?'AI practice, when available: your typed messages are sent to your configured coaching service. Otherwise guided examples are used.':'Guided preview: fictional responses; your text stays in this browser tab. No AI scoring.';setStage(true)}
- function close(){setStage(false)}
- function start(key){if(!scenes[key])return;state.session++;state.busy=false;state.scene=key;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;
+ function setScene(key,manual=true){if(!scenes[key])return;state.scene=key;if(manual)state.manualChannel=true;document.querySelectorAll('[data-conv]').forEach(b=>{const selected=b.dataset.conv===key;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected))})}
+ function detectScene(input){const t=input.toLowerCase();return /\b(phone|call|telephone|ring)\b/.test(t)?'call':/\b(whatsapp|text|message|dm|email|online chat)\b/.test(t)?'chat':'meet'}
+ function suggestPlan(situation,scene){
+  const t=situation.toLowerCase();const has=re=>re.test(t);
+  const school=has(/\b(school|teacher|daycare|parent|children|kids|pickup)\b/);
+  const event=has(/\b(conference|event|seminar|networking|workshop)\b/);
+  const coworker=has(/\b(colleague|coworker|co-worker|manager|boss|team)\b/);
+  const neighbor=has(/\b(neighbou?r|building)\b/);
+  const wedding=has(/\b(wedding|bride|groom)\b/);
+  const know=has(/\b(met|spoke|talked|chatted|reconnect|again|already know|catch up)\b/);
+  const advice=has(/\b(advice|guidance|opinion|perspective|recommendation)\b/);
+  let opener='',alternate='',followOne='',followTwo='',close='';
+  if(school){opener="Hi, I think we've seen each other around school. How's your week going?";alternate="Hi, nice to meet you. How has the school routine been for you?";
+   followOne="If they mention their children, ask what the kids have been enjoying lately.";followTwo="Share one small detail about your own family's experience.";close="Nice chatting. See you around school!";
+  }else if(event){opener=know?"Hi, it was nice meeting you at the event. How have things been since?":"Hi, I don't think we've met. What brought you to this event?";
+   alternate="What has been the most interesting part of this event for you?";followOne="Follow up on one thing they found interesting at the event.";followTwo="Share what drew you to the event, then invite their perspective.";close="I enjoyed chatting. Hope we cross paths again!";
+  }else if(coworker){opener="Hi, I don't think we've properly met yet. How's your week going?";alternate=advice?"Would you mind if I asked your perspective on something?":"What brought you into this line of work?";
+   followOne="Ask what they enjoy or find most interesting about their work.";followTwo="Offer a little about what you do, without turning it into a presentation.";close="It was great meeting you. Hope we get to chat again.";
+  }else if(neighbor){opener="Hi, I don't think we've properly met. How are you doing?";alternate="Hi! Have you been living around here long?";
+   followOne="Ask about a local place or activity they mention.";followTwo="Share one genuine thing you enjoy about the neighborhood.";close="Nice meeting you. See you around!";
+  }else if(wedding){opener="Hi, I don't think we've met. How do you know the couple?";alternate="What a lovely occasion. Are you here with family or friends?";
+   followOne="If they share a story, ask how they know the couple.";followTwo="Share a small personal story if it fits naturally.";close="Lovely chatting. Enjoy the celebration!";
+  }else{opener=know?"Hi, good to see you again! How have things been?":"Hi, I don't think we've met. How's your day going?";
+   alternate=advice?"Could I ask your perspective on something?":"What's been keeping you busy lately?";
+   followOne="Pick up one detail they mention and ask an easy follow-up.";followTwo="Share one genuine detail about yourself so it doesn't feel like an interview.";close="Nice talking with you. Enjoy the rest of your day!";
+  }
+  if(scene==='call'){opener=know?"Hi, it's nice to catch up. Is now a good time for a quick chat?":"Hi, is now a good time for a quick call? I'd like to introduce myself.";alternate="Would you have a few minutes to talk? I wanted to connect.";}
+  if(scene==='chat'){opener=know?"Hi! It was good meeting you. How has your week been?":coworker?"Hi! I thought I'd introduce myself since we're on the same team. How's your week going?":"Hi! I thought I'd reach out and say hello. How's your week going?";alternate="Hey, I hope your week is going well. How have things been?";}
+  const topic=has(/\b(emergency|preparedness|humanitarian)\b/)?'emergency preparedness':
+    has(/\b(logistics|supply chain|procurement)\b/)?'supply chain work':
+    has(/\b(travel|vacation|trip)\b/)?'travel':
+    has(/\b(technology|software|ai)\b/)?'technology':
+    has(/\b(sport|football)\b/)?'sports':'';
+  if(topic)followOne='If the subject comes up, ask what interests them about '+topic+'.';
+  if(advice&&!coworker)followTwo="If you're seeking advice, ask permission first, then keep your question specific.";
+  return {opener,alternate,followups:[followOne,followTwo],closing:close,source:'guided'};
+ }
+ function planSource(){return state.plan?.source==='ai'?'AI-tailored suggestions. Adjust the words to your own voice.':
+  (state.aiFailed?'AI unavailable; these are guided examples based on your description.':
+   'Guided examples based on a few details in your description. They are not live AI analysis.');}
+ function renderPlan(){if(!state.plan)return;const p=state.plan;
+  $('convPlanContext').textContent=scenes[state.scene].label+' · '+state.situation.slice(0,160)+(state.situation.length>160?'…':'');
+  $('convOpener').textContent=state.alternate?p.alternate:p.opener;
+  $('convOther').textContent=state.alternate?'Back to first opening ↻':'Try a different opening ↻';
+  $('convFollowOne').textContent=p.followups[0];$('convFollowTwo').textContent=p.followups[1];
+  $('convClosing').textContent=p.closing;$('convPlanSource').textContent=planSource();
+ }
+ async function prepare(){const situation=$('convSituation').value.replace(/\s+/g,' ').trim();
+  if(situation.length<7){$('convSetupStatus').textContent='Please describe the situation in a few words, or try an example.';$('convSituation').focus();return}
+  state.situation=situation;state.session++;const session=state.session;state.alternate=false;state.aiFailed=false;
+  state.plan=suggestPlan(situation,state.scene);$('convChooser').hidden=true;$('convPlan').hidden=false;$('convActive').hidden=true;$('convDone').hidden=true;renderPlan();
+  if(!aiReady)return;
+  $('convPlanSource').textContent='Guided ideas ready. Checking for an AI-tailored suggestion…';
+  const ctrl=new AbortController();const timeout=setTimeout(()=>ctrl.abort(),12000);
+  try{
+   const res=await fetch(endpoint+'/conversation-plan',{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',
+      headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({situation,channel:state.scene})});
+   if(!res.ok)throw Error('unavailable');const p=await res.json();
+   if(session!==state.session||$('convPlan').hidden)return;
+   if(typeof p.opener==='string'&&typeof p.alternate==='string'&&Array.isArray(p.followups)&&p.followups.length>=2&&typeof p.closing==='string'){
+    const safe=x=>String(x||'').trim().slice(0,350);
+    state.plan={opener:safe(p.opener),alternate:safe(p.alternate),followups:p.followups.slice(0,2).map(safe),closing:safe(p.closing),source:'ai'};
+   }
+  }catch(_){state.aiFailed=true}finally{clearTimeout(timeout);if(session===state.session&&!$('convPlan').hidden)renderPlan()}
+ }
+ function open(){state.session++;state.busy=false;state.scene='meet';state.situation='';state.plan=null;state.manualChannel=false;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;
+   $('convChooser').hidden=false;$('convPlan').hidden=true;$('convActive').hidden=true;$('convDone').hidden=true;$('convSituation').value='';$('convSetupStatus').textContent='';setScene('meet',false);
+   $('convMessages').replaceChildren();$('convPrivacy').textContent=aiReady?'Your description and typed replies may be sent to your configured AI coaching service.':'Guided preview: your description and replies stay in this browser tab; no AI scoring.';
+   setStage(true)
+ }
+ function close(){state.session++;setStage(false)}
+ function start(){if(!state.plan)return;state.session++;state.busy=false;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;
   $('convInput').hidden=false;$('convSend').hidden=false;$('convUse').hidden=false;
-  const d=scenes[key];$('convChooser').hidden=true;$('convDone').hidden=true;$('convActive').hidden=false;
-  $('convLabel').textContent=d.label;$('convScene').textContent=d.where;$('convMessages').replaceChildren();$('convFinish').hidden=true;
-  $('convInput').value='';$('convSuggestion').textContent=d.opener;$('convSuggestLabel').textContent='One natural opening';$('convStep').textContent='1 of 3';
-  $('convSend').disabled=false;$('convSend').textContent='Continue the conversation →';status('A helpful starting line, not a script you must memorize.');
+  $('convChooser').hidden=true;$('convPlan').hidden=true;$('convDone').hidden=true;$('convActive').hidden=false;
+  $('convLabel').textContent=scenes[state.scene].label;$('convScene').textContent=state.situation;$('convMessages').replaceChildren();$('convFinish').hidden=true;
+  $('convInput').value='';$('convSuggestion').textContent=state.alternate?state.plan.alternate:state.plan.opener;$('convSuggestLabel').textContent='Start with an opening';$('convStep').textContent='1 of 3';
+  $('convSend').disabled=false;$('convSend').textContent='Continue the conversation →';status('A starting line, not a script you have to memorize.');
   $('convInput').focus();
  }
  function applySuggestion(){const v=$('convSuggestion').textContent.trim();$('convInput').value=v;$('convInput').focus();status('Make it sound like you. Change any details that do not fit.')}
  function guidedResponse(line){
   const d=scenes[state.scene],n=Math.min(state.turn,2);
-  const reply=d.replies[n],suggestion=d.next[n];
+  const reply=d.replies[n],suggestion=state.plan?.followups?.[n]||d.next[n];
   return {reply,suggestion,tip:'Respond to something they shared, then ask one easy question or offer a small detail about yourself.',source:'guided'};
  }
  async function aiResponse(line){
@@ -69,7 +155,7 @@
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
   try{
    const response=await fetch(endpoint+'/conversation',{method:'POST',credentials:'omit',mode:'cors',cache:'no-store',headers:{'Content-Type':'application/json'},signal:controller.signal,
-    body:JSON.stringify({scenario:state.scene,turn:state.turn+1,latest:line,history:state.history.slice(-6)})});
+    body:JSON.stringify({scenario:state.scene,situation:state.situation,turn:state.turn+1,latest:line,history:state.history.slice(-6)})});
    if(!response.ok)throw Error('unavailable');
    const data=await response.json();
    if(typeof data.reply!=='string'||typeof data.suggestion!=='string'||!data.reply.trim()||!data.suggestion.trim())throw Error('invalid');
@@ -89,7 +175,7 @@
   msg('other',result.reply);state.history.push({role:'other',text:result.reply});state.turn++;
   $('convFinish').hidden=false;
   if(state.turn>=3){
-   $('convSuggestion').textContent=scenes[state.scene].ending;
+   $('convSuggestion').textContent=state.plan?.closing||scenes[state.scene].ending;
    $('convSuggestLabel').textContent='A natural way to finish';
    $('convInput').hidden=true;$('convSend').hidden=true;$('convUse').hidden=true;$('convStep').textContent='3 of 3';
    $('convFinish').textContent='Finish and reflect →';
@@ -123,7 +209,16 @@
   try{rec.start()}catch(_){status('Use your phone keyboard microphone or type your words.')}
  }
  trigger.addEventListener('click',open);$('convBack').addEventListener('click',close);
- document.querySelectorAll('[data-conv]').forEach(b=>b.addEventListener('click',()=>start(b.dataset.conv)));
+ document.querySelectorAll('[data-conv]').forEach(b=>b.addEventListener('click',()=>setScene(b.dataset.conv)));
+ $('convSituation').addEventListener('input',()=>{if(!state.manualChannel)setScene(detectScene($('convSituation').value),false);$('convSetupStatus').textContent=''});
+ const samples={conference:"I met someone briefly at a conference and I want to reconnect, but I'm unsure how to begin.",
+ school:"I see another parent at school pickup and I would like to introduce myself and have a friendly chat.",
+ work:"A new colleague joined the team and I want to introduce myself naturally."};
+ document.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>{$('convSituation').value=samples[b.dataset.example];state.manualChannel=false;setScene('meet',false)}));
+ $('convPrepare').addEventListener('click',prepare);
+ $('convEdit').addEventListener('click',()=>{state.session++;$('convPlan').hidden=true;$('convChooser').hidden=false});
+ $('convOther').addEventListener('click',()=>{state.alternate=!state.alternate;renderPlan()});
+ $('convPractice').addEventListener('click',start);
  $('convUse').addEventListener('click',applySuggestion);$('convSend').addEventListener('click',send);
  $('convInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();send()}});
  $('convFinish').addEventListener('click',finish);$('convAgain').addEventListener('click',open);
