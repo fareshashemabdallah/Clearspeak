@@ -15,3 +15,9 @@ The GitHub Pages app is ready to use this service, but genuine AI rewrites will 
 The app only sends **text** to this endpoint. Voice dictation uses browser/OS facilities where supported; some providers may process it remotely. The Worker does not explicitly save messages, but model and hosting providers may retain operational logs. Publish privacy disclosures before collecting consumer recordings.
 
 The server returns one natural rewrite, short memory cues and one delivery tip, not pronunciation scoring. Azure pronunciation assessment is a separate integration.
+
+## Conversation practice
+
+The same Worker now also supports `POST /conversation` for **Start a conversation**. It accepts a brief situation (`meet`, `call`, `chat`), the latest user line and at most six recent roleplay messages. It responds with a fictional counterpart's reply, one human-sounding follow-up suggestion, and a short coaching tip. It uses the same secret, disabled-by-default switch, origin check and rate-limiting binding as `/rewrite`. No additional public key is needed.
+
+Without an activated Worker and `coach-config.js` HTTPS URL, the website uses a clearly labelled, limited **guided preview** with prewritten fictional replies. Guided replies are not an AI evaluation and should not be presented as live intelligence. The conversation text stays in the browser tab in this preview; with the Worker enabled, typed messages are sent to your configured service for processing. Add privacy disclosures, authentication and per-user quotas before a public AI launch.
