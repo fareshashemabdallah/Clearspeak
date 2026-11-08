@@ -1,3 +1,15 @@
+## Chat Companion — messaging-first pilot (November 8, 2026)
+
+**Reply to a message** is accessible from the ClearSpeak home screen. Users may paste a selected message or short exchange from LinkedIn, WhatsApp, Instagram, Messenger, Telegram, or another app; enter optional relationship context and their draft; see one editable suggestion; copy it back to the original chat; and continue the exchange with **Next message**.
+
+- **Social media access:** The current GitHub Pages web app does **not** connect to or automatically read personal accounts or inboxes. The platform selector describes the source; it is not an account authorization. A user may paste text or, where the browser permits, tap **Paste from clipboard**. No messages are sent automatically.
+- **Private conversation history:** Memory is **off by default**. Enabling “Remember this conversation on this device” stores selected context, recent exchanges and in-progress draft in local browser storage. The user can reload or delete saved conversations. Browser storage is **not encrypted**, does not sync across devices, and may be lost when storage is cleared. Do not paste sensitive chats into a shared device.
+- **AI coaching:** When the optional secure Worker is deployed, activated and configured, Chat Companion calls POST /message-coach and sends selected text, last few exchanges and user feedback. It returns one proposed response, a short rationale and a boundary/uncertainty caution. When the Worker is disabled, the screen displays an honestly labelled **limited guided preview**, or lets the user edit/copy their own draft. It does not pretend the offline version understands arbitrary conversations.
+- **Adjust your voice:** “More natural”, “Shorter”, “Less eager”, or a free-text correction is available with the activated AI service. Users always edit and send responses themselves.
+- **Future native integration:** An iOS/Android sharing extension or keyboard is a separate native-mobile development step. This web feature is not a WhatsApp, Instagram or LinkedIn inbox integration. The keyboard would not automatically gain access to another app's entire conversation.
+
+**Important before public AI activation:** Add user authentication, abuse protection, quotas, spending limits, transparent privacy disclosures, and appropriate data-processing safeguards. The existing Worker is disabled by default and contains no public API secret.
+
 ## Situation-first conversation guidance — November 8, 2026
 
 **Start a conversation** now asks users to describe their own situation in plain English, then choose **In person**, **Phone call**, or **Message** (with automatic detection where possible). ClearSpeak provides one suggested opener, a second option, guidance for responding and keeping the conversation mutual, and a natural closing, followed by an optional three-exchange practice.
