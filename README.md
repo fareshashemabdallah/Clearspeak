@@ -1,5 +1,13 @@
 # ClearSpeak — Speak with Impact
 
+## Current experience (November 2026)
+
+The main `index.html` is the **English-first lightweight ClearSpeak coach**. It opens with one message field and a guided sequence: improve the wording → say it → review → repeat. The `training` area offers three short daily exercises, not a full menu of tools. The previous bilingual 28-day experience remains archived in `training.html` for future development.
+
+**Before/after listening:** `voice.js` dispatches a local recording event; `growth.js` displays first and second attempts side by side inside the reflection screen. Recordings are kept only in the current tab, are not uploaded by the app, and are cleared when a new thought starts. `growth.js` also shows practice days over the last week, stored locally in the browser.
+
+**Important accuracy limitation:** Current writing guidance is heuristic and voice playback is self-review; the app does not yet use Azure or another server-side pronunciation assessment service. Optional browser speech recognition can involve the browser vendor's online service and does not measure phoneme accuracy. No clinical claims are made.
+
 A lightweight **28-day communication training app with five additional Speaking with Influence labs**, with English and Arabic examples, a practice timer, optional voice recording and playback, dictation where supported, locally saved progress, and transparent text-based coaching feedback.
 
 It is a **static website**, so no server, accounts, database, or API key is required. The app is intended for GitHub Pages.
