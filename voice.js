@@ -73,12 +73,15 @@
      const preferred=['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(type=>MediaRecorder.isTypeSupported?.(type));
      recording=new MediaRecorder(s,preferred?{mimeType:preferred}:undefined);
      const type=recording.mimeType||preferred||'audio/webm';
+     const recordedAt=performance.now();
      recording.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
      recording.onstop=()=>{
        if(epoch!==sessionEpoch||!chunks.length)return;
        if(audioURL)URL.revokeObjectURL(audioURL);
-       audioURL=URL.createObjectURL(new Blob(chunks,{type}));
+       const blob=new Blob(chunks,{type});
+       audioURL=URL.createObjectURL(blob);
        audioWidget.src=audioURL;review.hidden=false;setStatus(t('saved'));
+       document.dispatchEvent(new CustomEvent('clearspeak:recording',{detail:{blob,durationMs:performance.now()-recordedAt}}));
      };
      recording.onerror=()=>setStatus(t('unavailable'));
      recording.start();setStatus(t('recording'));
