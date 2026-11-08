@@ -1,12 +1,12 @@
 {
-  "name": "ClearSpeak — Speak with Impact",
+  "name": "ClearSpeak — Your speaking companion",
   "short_name": "ClearSpeak",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f3f7f6",
-  "theme_color": "#113b46",
-  "description": "Bilingual daily practice for clear, concise, calm communication.",
+  "background_color": "#F8F7F3",
+  "theme_color": "#F8F7F3",
+  "description": "English-speaking practice with private before-and-after playback, articulation prompts, and gentle daily progress.",
   "icons": [
     {
       "src": "icon.svg",
