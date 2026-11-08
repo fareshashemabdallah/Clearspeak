@@ -127,6 +127,7 @@
    if(typeof p.opener==='string'&&typeof p.alternate==='string'&&Array.isArray(p.followups)&&p.followups.length>=2&&typeof p.closing==='string'){
     const safe=x=>String(x||'').trim().slice(0,350);
     state.plan={opener:safe(p.opener),alternate:safe(p.alternate),followups:p.followups.slice(0,2).map(safe),closing:safe(p.closing),source:'ai'};
+    window.CSPlans?.recordAI?.();
    }
   }catch(_){state.aiFailed=true}finally{clearTimeout(timeout);if(session===state.session&&!$('convPlan').hidden)renderPlan()}
  }
@@ -179,6 +180,7 @@
    if(!response.ok)throw Error('unavailable');
    const data=await response.json();
    if(typeof data.reply!=='string'||typeof data.suggestion!=='string'||!data.reply.trim()||!data.suggestion.trim())throw Error('invalid');
+   window.CSPlans?.recordAI?.();
    return {reply:data.reply.slice(0,380),suggestion:data.suggestion.slice(0,380),tip:typeof data.tip==='string'?data.tip.slice(0,200):'',source:'ai'};
   }catch(_){state.aiFailed=true;return null}finally{clearTimeout(timeout)}
  }
