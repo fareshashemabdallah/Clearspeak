@@ -43,14 +43,15 @@
  if(beneath) beneath.insertAdjacentElement('afterend',trigger);else home.append(trigger);
  const endpoint=String(window.CS_COACH_API_URL||'').trim().replace(/\/$/,'');
  const aiReady=/^https:\/\/[a-z0-9.-]+(?:\/[a-z0-9/_-]+)?$/i.test(endpoint);
- const state={scene:null,turn:0,history:[],userLines:[],busy:false,aiFailed:false,recognizer:null};
+ const state={scene:null,turn:0,history:[],userLines:[],busy:false,aiFailed:false,recognizer:null,session:0};
  function msg(role,line){const box=document.createElement('div');box.className='csconv-message '+(role==='you'?'csconv-you':'csconv-other');const cap=document.createElement('span');cap.textContent=role==='you'?'You':'The other person';const p=document.createElement('p');p.textContent=line;box.append(cap,p);$('convMessages').append(box);$('convMessages').scrollTop=$('convMessages').scrollHeight}
  function status(t){$('convNotice').textContent=t}
  function setStage(open){document.body.classList.toggle('csconv-open',open);$('conversationScreen').hidden=!open; if(open){$('entry').hidden=true; window.scrollTo(0,0)}else{stopVoice();$('entry').hidden=false;window.scrollTo(0,0)} }
  function stopVoice(){if(state.recognizer){try{state.recognizer.abort()}catch(_){}state.recognizer=null}}
- function open(){state.scene=null;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;$('convChooser').hidden=false;$('convActive').hidden=true;$('convDone').hidden=true;$('convMessages').replaceChildren();$('convPrivacy').textContent=aiReady?'AI practice, when available: your typed messages are sent to your configured coaching service. Otherwise guided examples are used.':'Guided preview: fictional responses; your text stays in this browser tab. No AI scoring.';setStage(true)}
+ function open(){state.session++;state.busy=false;state.scene=null;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;$('convChooser').hidden=false;$('convActive').hidden=true;$('convDone').hidden=true;$('convMessages').replaceChildren();$('convPrivacy').textContent=aiReady?'AI practice, when available: your typed messages are sent to your configured coaching service. Otherwise guided examples are used.':'Guided preview: fictional responses; your text stays in this browser tab. No AI scoring.';setStage(true)}
  function close(){setStage(false)}
- function start(key){if(!scenes[key])return;state.scene=key;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;
+ function start(key){if(!scenes[key])return;state.session++;state.busy=false;state.scene=key;state.turn=0;state.history=[];state.userLines=[];state.aiFailed=false;
+  $('convInput').hidden=false;$('convSend').hidden=false;$('convUse').hidden=false;
   const d=scenes[key];$('convChooser').hidden=true;$('convDone').hidden=true;$('convActive').hidden=false;
   $('convLabel').textContent=d.label;$('convScene').textContent=d.where;$('convMessages').replaceChildren();$('convFinish').hidden=true;
   $('convInput').value='';$('convSuggestion').textContent=d.opener;$('convSuggestLabel').textContent='One natural opening';$('convStep').textContent='1 of 3';
@@ -80,11 +81,11 @@
   const line=$('convInput').value.trim();
   if(!line){status('Write a line in your own words, or choose “Use this idea.”');$('convInput').focus();return}
   if(line.includes('[')||line.includes(']')){status('Replace the bracketed example with something true for you.');return}
-  state.busy=true;$('convSend').disabled=true;status(aiReady&&!state.aiFailed?'Thinking about a natural reply…':'');
+  state.busy=true;const session=state.session;$('convSend').disabled=true;status(aiReady&&!state.aiFailed?'Thinking about a natural reply…':'');
   msg('you',line);state.history.push({role:'you',text:line});state.userLines.push(line);$('convInput').value='';
   const n=state.turn;
   const result=(await aiResponse(line))||guidedResponse(line);
-  if(!document.body.classList.contains('csconv-open')||state.scene===null){state.busy=false;return}
+  if(session!==state.session||!document.body.classList.contains('csconv-open')||state.scene===null){state.busy=false;return}
   msg('other',result.reply);state.history.push({role:'other',text:result.reply});state.turn++;
   $('convFinish').hidden=false;
   if(state.turn>=3){
