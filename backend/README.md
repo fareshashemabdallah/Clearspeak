@@ -21,3 +21,9 @@ The server returns one natural rewrite, short memory cues and one delivery tip, 
 The same Worker now also supports `POST /conversation` for **Start a conversation**. It accepts a brief situation (`meet`, `call`, `chat`), the latest user line and at most six recent roleplay messages. It responds with a fictional counterpart's reply, one human-sounding follow-up suggestion, and a short coaching tip. It uses the same secret, disabled-by-default switch, origin check and rate-limiting binding as `/rewrite`. No additional public key is needed.
 
 Without an activated Worker and `coach-config.js` HTTPS URL, the website uses a clearly labelled, limited **guided preview** with prewritten fictional replies. Guided replies are not an AI evaluation and should not be presented as live intelligence. The conversation text stays in the browser tab in this preview; with the Worker enabled, typed messages are sent to your configured service for processing. Add privacy disclosures, authentication and per-user quotas before a public AI launch.
+
+## Situation-aware guidance
+
+The Worker also includes `POST /conversation-plan`, taking `{ "situation": "...", "channel": "meet|call|chat" }`, and returns one opener, a shorter alternative, two potential follow-up prompts, and a natural closing. The `/conversation` roleplay accepts an additional situation string, uses it to guide fictional responses, and stays subject to the same disabled-by-default switch, IP rate limit and origin restriction. Do not activate it publicly without additional authentication, user-specific quotas, spending controls and appropriate privacy disclosures.
+
+The browser shows limited local suggestions until the Worker URL and secret are configured; no public client-side API keys are needed.
