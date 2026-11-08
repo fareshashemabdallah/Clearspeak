@@ -49,3 +49,8 @@ html[lang="ar"] .daily-nudge{border-left:0;border-right:3px solid #E3A18B;border
 @media(max-width:520px){.speaking-focus{padding:15px;gap:9px;margin:16px 0 8px}.focus-word{font-size:21px}.focus-buttons{min-width:100px}.focus-action{padding:8px 9px;font-size:11px}.focus-help{font-size:11px}.voice-review{padding:16px 15px}}
 
 .speaking-focus.focus-less .focus-buttons{display:none}
+/* One subtle voice input option: no additional screen. */
+.dictation-row{display:flex;justify-content:flex-end;gap:12px;align-items:center;margin:7px 0 0;color:var(--muted);font-size:11px}
+.dictation-row button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:#fff;color:var(--ink);font-weight:700}
+.dictation-row button[hidden]{display:none!important}
+@media(max-width:520px){.dictation-row{font-size:10px;gap:6px}}
