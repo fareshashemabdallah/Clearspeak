@@ -10,10 +10,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ClearSpeak">
 <title>ClearSpeak — Your words, easier to say.</title>
-<link rel="stylesheet" href="light.css?v=4">
+<link rel="stylesheet" href="light.css?v=5">
 <link rel="stylesheet" href="growth.css?v=1">
 <script src="voice.js?v=1" defer></script>
-<script src="light.js?v=4" defer></script>
+<script src="coach-config.js?v=1" defer></script>
+<script src="coach.js?v=1" defer></script>
+<script src="light.js?v=5" defer></script>
 <script src="growth.js?v=1" defer></script>
 </head>
 <body>
@@ -32,6 +34,7 @@
       <div class="composer" id="composer">
         <label class="composer-label" for="thought" data-t="question">What do you want to say?</label>
         <textarea id="thought" maxlength="1500" rows="4" placeholder="Write it just as it comes out…" data-placeholder="placeholder" autocomplete="off"></textarea>
+        <div class="dictation-row"><button type="button" id="dictateThought" hidden aria-label="Speak your thought" aria-pressed="false">Speak</button><span>Or use the microphone on your phone keyboard.</span></div>
         <p class="message-error" id="error" role="alert" hidden></p>
         <div class="prompt-row">
           <span class="prompt-title" data-t="try">Try an example</span>
@@ -39,7 +42,7 @@
           <button type="button" class="sample" data-sample="interrupted" data-t="interrupted">Interrupted</button>
           <button type="button" class="sample" data-sample="home" data-t="home">At home</button>
         </div>
-        <button type="button" id="create" class="primary-btn"><span data-t="create">Help me say it</span><span aria-hidden="true" class="arrow">↗</span></button>
+        <button type="button" id="create" class="primary-btn"><span data-t="create">Help me say it naturally</span><span aria-hidden="true" class="arrow">↗</span></button>
       </div>
       <div class="beneath"><span class="spark-icon" aria-hidden="true">✦</span><span data-t="quietNote">No pressure. No perfect wording. Just a clearer way forward.</span></div>
     </section>
@@ -53,7 +56,7 @@
         <button type="button" id="practice" class="primary-btn"><span data-t="practice">Try saying it</span><span aria-hidden="true" class="arrow">↗</span></button>
         <div class="secondary-actions"><button type="button" id="listen" class="text-action"><span aria-hidden="true">◖))</span> <span data-t="listen">Hear it</span></button><button type="button" id="copy" class="text-action"><span aria-hidden="true">⧉</span> <span data-t="copy">Copy</span></button><button type="button" id="shorter" class="text-action"><span aria-hidden="true">↘</span> <span data-t="shorter">Shorter</span></button></div>
       </div>
-      <p class="small-note" data-t="offline">A simple on-device phrasing guide, not an AI rewrite. Check your meaning before using it.</p>
+      <p class="small-note" id="coachSourceNote" aria-live="polite">Quick on-device suggestion. Personalized AI coaching is not yet connected.</p>
     </section>
 
     <section id="practiceScreen" class="screen practice-screen" hidden>
