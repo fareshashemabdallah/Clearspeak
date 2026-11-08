@@ -41,7 +41,7 @@
    const item=document.createElement('div');item.className='growth-take';
    const label=document.createElement('div');label.className='growth-take-label';
    const title=document.createElement('strong');title.textContent=i===0?'First take':'Second take';
-   const duration=document.createElement('span');duration.textContent=Math.round(take.durationMs/1000)+' sec';
+   const duration=document.createElement('span');duration.textContent=Math.max(1,Math.round(take.durationMs/1000))+' sec';
    label.append(title,duration);
    const audio=document.createElement('audio');audio.controls=true;audio.preload='none';audio.src=take.url;audio.setAttribute('aria-label',title.textContent+' recording');
    item.append(label,audio);root.append(item);
