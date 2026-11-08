@@ -69,6 +69,7 @@
   catch(_){unavailable=true}
   finally{button.disabled=false;label.textContent=tr('create')}
   if(request!==buildId||input!==normalize($('thought').value))return;
+  if(suggestion)window.CSPlans?.recordAI?.();
   output=suggestion||(exact?{...examples[lang][chosenSample],sampleKey:chosenSample}:generic(input));
   if(!output.parts.length){$('error').textContent=tr('empty');$('error').hidden=false;return}
   $('coachSourceNote').textContent=suggestion?
