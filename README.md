@@ -1,3 +1,9 @@
+## Situation-first conversation guidance — November 8, 2026
+
+**Start a conversation** now asks users to describe their own situation in plain English, then choose **In person**, **Phone call**, or **Message** (with automatic detection where possible). ClearSpeak provides one suggested opener, a second option, guidance for responding and keeping the conversation mutual, and a natural closing, followed by an optional three-exchange practice.
+
+Without the optional AI backend, these are **limited guided suggestions based on the user's description**. They do not fully understand arbitrary details and simulated replies are fictional, not claims about what the real person will say. The text stays in the browser tab in guided mode. With the secure Cloudflare backend enabled, the app calls `/conversation-plan` and `/conversation` for context-aware AI guidance; the typed situation and replies are sent to the backend. The backend is disabled by default. No AI keys are stored in GitHub.
+
 ## Conversation practice (November 2026)
 
 The ClearSpeak home includes **Start a conversation**: Meet someone, Make a call, or Start a chat. Each is a short three-exchange simulation with natural opening suggestions, editable user replies, fictional counterpart replies and one reflective practice note. English-first, no account, and no added dashboard. Optional voice dictation is browser-dependent.
