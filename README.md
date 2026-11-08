@@ -63,3 +63,11 @@ For real use on an iPhone, open the deployed HTTPS site in Safari. A downloaded 
 - `.nojekyll` — ensures GitHub Pages serves all static files directly
 
 All app functionality runs client-side. If advanced AI feedback based on meaning or voice acoustics is needed later, a **separate secure backend** will be necessary to protect API keys and users' recordings; do not put API secrets in this repository.
+## Natural spoken-language coaching (November 2026)
+
+The main button is now **Help me say it naturally**. The home page supports typed thoughts or speech dictation where the browser allows it, then a natural-sounding suggested message, with an optional speaking exercise. There are no new dashboards.
+
+- On GitHub Pages today, a **basic local suggestion** remains available without a server. It is explicitly identified as non-AI.
+- Genuine personalized AI suggestions are implemented as an **optional backend integration**. The public client code is in `coach.js` and its public URL is in `coach-config.js` (currently blank). The secure Cloudflare Worker scaffold and activation steps are in `backend/README.md`.
+- The Worker is disabled by default and requires a private model API key, deployment, spend controls, and production-grade authentication before a public paid launch. **Never put a secret API key in public GitHub Pages JavaScript.**
+- Pronunciation scoring remains a **separate, not-yet-connected** specialized speech-analysis service. Audio replay is not the same as automated articulation assessment.
