@@ -16,7 +16,7 @@ view.innerHTML=[
 '<div class="comp-grid"><label>Who is this with?<input id="compPerson" maxlength="60" placeholder="Name or nickname (optional)"></label>',
 '<label>Messaging app<select id="compPlatform"><option>WhatsApp</option><option>LinkedIn</option><option>Instagram</option><option>Messenger</option><option>Telegram</option><option>Other</option></select></label></div>',
 '<label for="compContext">Anything I should know? <span class="comp-muted">(optional)</span></label>',
-'<textarea id="compContext" maxlength="650" rows="2" placeholder="We chatted years ago and I want to reconnect, without pressure."></textarea></div>',
+'<textarea id="compContext" maxlength="650" rows="2"></textarea></div>',
 '<label for="compIncoming">What did they say?</label><textarea id="compIncoming" maxlength="3500" rows="5" placeholder="Paste a message or short exchange here…"></textarea>',
 '<div class="comp-paste"><button type="button" id="compPaste" class="comp-light">Paste from clipboard</button><span>No access to your inbox. Only content you paste here.</span></div>',
 '<details class="comp-draft"><summary>Already have a reply in mind?</summary><label for="compDraft">Your draft (optional)</label><textarea id="compDraft" maxlength="1500" rows="3" placeholder="Write it just as it comes out…"></textarea></details>',
