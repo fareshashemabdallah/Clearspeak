@@ -146,9 +146,29 @@
  }
  function applySuggestion(){const v=$('convSuggestion').textContent.trim();$('convInput').value=v;$('convInput').focus();status('Make it sound like you. Change any details that do not fit.')}
  function guidedResponse(line){
-  const d=scenes[state.scene],n=Math.min(state.turn,2);
-  const reply=d.replies[n],suggestion=state.plan?.followups?.[n]||d.next[n];
-  return {reply,suggestion,tip:'Respond to something they shared, then ask one easy question or offer a small detail about yourself.',source:'guided'};
+  const n=Math.min(state.turn,2),t=state.situation.toLowerCase();
+  let replies=[],next=[];
+  if(/\b(school|teacher|daycare|parent|children|kids|pickup)\b/.test(t)){
+   replies=["Hi! Nice meeting you. It's been a busy week with the kids. How about you?","They've been enjoying their time outside lately. What about yours?","It was lovely chatting. See you at pickup!"];
+   next=["That sounds nice. What have the kids been enjoying recently?","It's nice to meet another parent here. What do you like doing with the kids after school?"];
+  }else if(/\b(colleague|coworker|co-worker|manager|boss|team)\b/.test(t)){
+   replies=["Hi! Nice meeting you too. I'm still getting to know everyone. How long have you been here?","There's a lot to learn, but I'm enjoying it. How about your work?","It was good chatting. Let's catch up again sometime."];
+   next=["That's interesting. What part of your work do you enjoy most?","I've enjoyed hearing your perspective. What got you interested in this work?"];
+  }else if(/\b(conference|event|seminar|networking|workshop)\b/.test(t)){
+   replies=["Nice to hear from you! It was an interesting event. How have you been?","I enjoyed meeting people from different backgrounds. What about you?","I'm glad we caught up. Let's stay in touch."];
+   next=["I enjoyed the chance to connect too. What stood out to you most at the event?","That's interesting. Have you been to other events like it?"];
+  }else if(/\b(neighbou?r|building)\b/.test(t)){
+   replies=["Hi, nice meeting you! It's been a lovely week. How about yours?","I've been enjoying the area. Have you been here long?","It was good chatting. See you around!"];
+   next=["Nice! Is there a place nearby you especially like?","It's good getting to know the neighbours. What's your favourite thing about the area?"];
+  }else if(/\b(wedding|bride|groom)\b/.test(t)){
+   replies=["Nice to meet you! I've known the couple for a while. How about you?","It's such a lovely celebration, isn't it?","Lovely chatting. Enjoy the rest of the day!"];
+   next=["That's lovely. How long have you known them?","Have you had a favourite moment of the day so far?"];
+  }else{
+   const d=scenes[state.scene];replies=d.replies;
+   next=d.next;
+  }
+  return {reply:replies[n],suggestion:next[n]||state.plan?.closing||scenes[state.scene].ending,
+   tip:'This is a fictional practice reply. Listen for one detail and respond naturally.',source:'guided'};
  }
  async function aiResponse(line){
   if(!aiReady||state.aiFailed)return null;
