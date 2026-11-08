@@ -1,3 +1,9 @@
+## Conversation practice (November 2026)
+
+The ClearSpeak home includes **Start a conversation**: Meet someone, Make a call, or Start a chat. Each is a short three-exchange simulation with natural opening suggestions, editable user replies, fictional counterpart replies and one reflective practice note. English-first, no account, and no added dashboard. Optional voice dictation is browser-dependent.
+
+**By default this is guided, fictional practice—not real AI conversation analysis.** The secure Cloudflare Worker can provide contextual AI-generated roleplay via `/conversation` only after an owner activates it; see `backend/README.md`. Recordings are not uploaded by this feature, and the guided text is not saved to the server.
+
 # ClearSpeak — Speak with Impact
 
 ## Current experience (November 2026)
