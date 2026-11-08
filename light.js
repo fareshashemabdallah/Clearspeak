@@ -29,7 +29,7 @@
   interrupted:{parts:['خلّيني كمّل فكرتي بالأول.','وبعدها أكيد بدي أسمع رأيك.'],cues:['كمّل الفكرة','بهدوء','اسمع رأيهم']},
   home:{parts:['شو رأيكم نختار نشاط بسيط لنهاية الأسبوع؟','هيك منقضي وقت حلو مع الولاد من دون ما نعقّد الخطة.'],cues:['نشاط واحد','وقت عائلي','ببساطة']}
  }};
- let lang='en'; try{lang=localStorage.getItem('cs_light_lang')==='ar'?'ar':'en'}catch(_){}
+ let lang='en'; // English-first launch. Existing Arabic content is retained for later expansion.
  let chosenSample=null;let output=null;let timer=null;let remaining=20;let short=false;let active='entry';
  let mode='quick',selectedFeeling=null,trainingStep=0;
  const localDate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
